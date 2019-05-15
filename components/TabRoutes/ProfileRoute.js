@@ -55,17 +55,17 @@ export default class ProfileRoute extends Component {
         if (this.props.isLoggedIn) {
             switch (this.state.view) {
                 case 'reviews':
-                    return <Reviews redirectTo={(where) => this.redirectTo(where)}/>
+                    return <Reviews redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'clientedit':
-                    return <ClientEdit  redirectTo={(where) => this.redirectTo(where)}/>
+                    return <ClientEdit  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'clientprofile':
-                    return <ClientProfile  redirectTo={(where) => this.redirectTo(where)}/>
+                    return <ClientProfile  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'professionaledit':
-                    return <ProfessionalEdit  redirectTo={(where) => this.redirectTo(where)}/>
+                    return <ProfessionalEdit  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'professionalprofile':
-                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)}/>
+                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 default:
-                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)}/>
+                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
             }
         } else {
             switch (this.state.view) {

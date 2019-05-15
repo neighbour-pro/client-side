@@ -1,0 +1,15 @@
+import axios from 'axios';
+
+export default class AuthService{
+    constructor(){
+        this.service = axios.create({
+            baseURL: 'http://localhost:5000/api/user',
+            withCredentials: true
+        });
+    }
+
+    getClientById(id){
+        return this.service.get('/'+id)
+    }
+
+}

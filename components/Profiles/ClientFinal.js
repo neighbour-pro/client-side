@@ -2,33 +2,59 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { Button, Avatar, Badge, Icon, withBadge } from 'react-native-elements';
 
-
+import UserService from '../../services/UserService';
+import Loader from '../Loader/Loader';
 
 
 export default class ClientFinal extends Component {
+    constructor(props) {
+        super(props);
+        this.userService = new UserService();
+        this.state = {
+            client: false,
+            loaded: false
+        }
+    }
 
+    componentDidMount() {
+        this.userService.getClientById(this.props.isLoggedIn._id)
+            .then(response => {
+                this.setState({
+                    ...this.state,
+                    client: response.data.user,
+                    loaded: true
+                })
+            })
+            .catch(err => console.log('Failed', err))
+    }
 
     render() {
         return (
-            <View>
+            <React.Fragment>
+                {
+                    this.state.loaded ?
+                        <View>
 
-                <View style={styles.profileHeader}>
-                    <Image style={styles.imgProfile} source={{ uri: 'https://img.archilovers.com/projects/c_383_63fe7970-a3e6-45e2-ba7d-7bfe6563e6f4.jpg' }} />
-                    <Text style={styles.name}>Perfil CLIENT</Text>
-                    <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
-                </View>
-                <View style={styles.hrLine} />
+                            <View style={styles.profileHeader}>
+                                <Image style={styles.imgProfile} source={{ uri: this.state.client.userPhoto }} />
+                                <Text style={styles.name}>{this.state.client.name}</Text>
+                                <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
+                            </View>
+                            <View style={styles.hrLine} />
 
-                <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
-                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('clientedit')}>
-                    <Text>Edit</Text>
-                </TouchableHighlight>
+                            <Text style={styles.description}>{this.state.client.description}</Text>
+                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('clientedit')}>
+                                <Text>Edit</Text>
+                            </TouchableHighlight>
 
-                <View style={{ width: '50%' }}>
-                </View>
+                            <View style={{ width: '50%' }}>
+                            </View>
 
 
-            </View>
+                        </View> :
+                        <Loader />
+                }
+            </React.Fragment>
 
         );
     }
