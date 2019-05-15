@@ -41,6 +41,7 @@ export default class LoginView extends Component {
           <TextInput style={styles.inputs}
               placeholder="Email"
               keyboardType="email-address"
+              autoCapitalize = 'none'
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
         </View>
@@ -64,12 +65,6 @@ export default class LoginView extends Component {
         <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirect('signup')}>
             <Text>Create Account</Text>
         </TouchableHighlight>
-
-        <View>
-        <Button
-          title="Go to Details"
-        />
-        </View>
 </View>
     );
   }

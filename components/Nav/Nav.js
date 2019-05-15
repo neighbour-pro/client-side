@@ -34,7 +34,7 @@ const SearchRoutes = () => <SearchRoute/>;
 
 export default class Nav extends React.Component {
   state = {
-    index: 0,
+    index: 1,
     routes: [
       { key: 'help', title: 'Help', icon: 'help' },
       { key: 'searchMap', title: 'Search', icon: 'search' },

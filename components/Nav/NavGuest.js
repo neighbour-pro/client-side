@@ -42,8 +42,8 @@ export default class NavGuest extends React.Component {
       });
   }
 
-  ProfileRoutes = () => <ProfileRoute isLoggedIn={this.state.isLoggedIn}/>;
-  SearchRoutes = () => <SearchRoute isLoggedIn={this.state.isLoggedIn}/>;
+  ProfileRoutes = () => <ProfileRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)}/>;
+  SearchRoutes = () => <SearchRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)}/>;
   
   _handleIndexChange = index => this.setState({ index });
 

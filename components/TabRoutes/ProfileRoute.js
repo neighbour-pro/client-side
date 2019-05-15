@@ -20,7 +20,7 @@ export default class ProfileRoute extends Component {
         ...this.state,
         view: where
     });
-    
+
     render() {
         if (this.props.isLoggedIn) {
             switch (this.state.view) {
@@ -35,9 +35,11 @@ export default class ProfileRoute extends Component {
         } else {
             switch (this.state.view) {
                 case 'signup':
-                    return <Signup redirect={(where) => this.redirectTo(where)} />
+                    return <Signup redirect={(where) => this.redirectTo(where)} changeMenu={(user)=>this.props.changeMenu(user)} />
+                case 'login':
+                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user)=>this.props.changeMenu(user)} />
                 default:
-                    return <Login redirect={(where) => this.redirectTo(where)} />
+                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user)=>this.props.changeMenu(user)} />
             }
         }
     }
