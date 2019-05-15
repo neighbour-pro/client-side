@@ -34,11 +34,7 @@ export default class LoginView extends Component {
     };
   }
 
-  onClickListener = (viewId) => {
-    Alert.alert("¡Atención!", "Botón pulsado: " + viewId);
-  }
-
-  onValueChange(value: string) {
+  onValueChange(value) {
     this.setState({
       selected: value
     });
