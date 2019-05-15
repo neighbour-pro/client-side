@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import ProListView from '../Prolist/ProListView';
+import Logout from '../Logout/Logout';
 
 export default class HelpRoute extends Component {
     constructor(props) {
@@ -13,7 +13,7 @@ export default class HelpRoute extends Component {
         {
             switch(this.state.view){
                 default:
-                return <ProListView/>
+                return <Logout/>
             }
         }
     }

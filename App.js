@@ -28,11 +28,13 @@ export default class App extends Component {
   
   componentDidMount(){
     this.authService.isLogged()
-    .then(res => this.setState({
-      ...this.state,
-      loaded: true,
-      isLoggedIn: res.data
-    }))
+    .then(res => {
+      this.setState({
+        ...this.state,
+        loaded: true,
+        isLoggedIn: res.data
+      }, ()=>console.log(res))
+    })
     .catch(err => this.setState({
       ...this.state,
       loaded: true,

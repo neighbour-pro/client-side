@@ -7,12 +7,42 @@ import Signup from '../Signup/Signup';
 import ProList from '../Prolist/ProListView';
 import Map from '../Map/Mapa';
 
+import ProfessionalProfile from '../Profiles/ProfessionalFinal';
+import ProfessionalEdit from '../Profiles/ProfessionalEdit';
+import ClientProfile from '../Profiles/ClientFinal';
+import ClientEdit from '../Profiles/ClientEdit';
+
 
 export default class ProfileRoute extends Component {
     constructor(props) {
         super(props);
         this.state = {
             view: '',
+        }
+        
+    }
+
+    componentDidMount(){
+        // ( this.props.isLoggedIn.role === 'Client') ? 
+        // this.setState({...this.state, view: 'clientprofile'}):
+        // this.setState({...this.state, view: 'professionalprofile'})
+
+        
+        if(this.props.isLoggedIn){
+            switch(this.props.isLoggedIn.role){
+                case 'Client':
+                this.setState({
+                    ...this.state,
+                    view: 'clientprofile'
+                });
+                break;
+                case 'Professional':
+                this.setState({
+                    ...this.state,
+                    view: 'professionalprofile'
+                });
+                break;
+            }
         }
     }
 
@@ -24,13 +54,18 @@ export default class ProfileRoute extends Component {
     render() {
         if (this.props.isLoggedIn) {
             switch (this.state.view) {
-                case 'rating':
-                    return <Rating />
-                case 'prolist':
-                    return <ProList />
-
+                case 'reviews':
+                    return <Reviews redirectTo={(where) => this.redirectTo(where)}/>
+                case 'clientedit':
+                    return <ClientEdit  redirectTo={(where) => this.redirectTo(where)}/>
+                case 'clientprofile':
+                    return <ClientProfile  redirectTo={(where) => this.redirectTo(where)}/>
+                case 'professionaledit':
+                    return <ProfessionalEdit  redirectTo={(where) => this.redirectTo(where)}/>
+                case 'professionalprofile':
+                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)}/>
                 default:
-                    return <Profile />
+                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)}/>
             }
         } else {
             switch (this.state.view) {

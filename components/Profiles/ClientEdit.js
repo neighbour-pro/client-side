@@ -5,7 +5,7 @@ import { Button, Avatar, Badge, Icon, withBadge } from 'react-native-elements';
 
 
 
-export default class ClientFinal extends Component {
+export default class ClientEdit extends Component {
 
 
     render() {
@@ -14,14 +14,14 @@ export default class ClientFinal extends Component {
 
                 <View style={styles.profileHeader}>
                     <Image style={styles.imgProfile} source={{ uri: 'https://img.archilovers.com/projects/c_383_63fe7970-a3e6-45e2-ba7d-7bfe6563e6f4.jpg' }} />
-                    <Text style={styles.name}>Perfil CLIENT</Text>
+                    <Text style={styles.name}>Perfil CLIENT EDITING</Text>
                     <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
                 </View>
                 <View style={styles.hrLine} />
 
                 <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
                 <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('clientedit')}>
-                    <Text>Edit</Text>
+                    <Text>Save</Text>
                 </TouchableHighlight>
 
                 <View style={{ width: '50%' }}>

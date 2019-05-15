@@ -19,4 +19,8 @@ export default class AuthService{
     login(post){
         return this.service.post('/login', {...post});
     }
+
+    logout(){
+        return this.service.post('/logout', {});
+    }
 }

@@ -2,8 +2,6 @@ import * as React from 'react';
 import { BottomNavigation, Text, Menu } from 'react-native-paper';
 import ProfileRoute from '../TabRoutes/ProfileRoute';
 import SearchRoute from '../TabRoutes/SearchRoute';
-import Login from '../Login/Login'
-import Signup from '../Signup/Signup'
 
 import AuthService from '../../services/AuthService';
 import Loader from '../Loader/Loader';
