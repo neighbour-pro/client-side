@@ -11,5 +11,12 @@ export default class AuthService{
     getClientById(id){
         return this.service.get('/'+id)
     }
+    getProfessionalById(id){
+        return this.service.get('/'+id)
+    }
+
+    getProfessionalNearMe(lng, lat){
+        return this.service.get(`/nearme/${lng}/${lat}/20000`)
+    }
 
 }

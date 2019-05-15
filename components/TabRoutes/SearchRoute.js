@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ProListView from '../Prolist/ProListView';
+import Map from '../Map/Mapa';
 
 export default class SearchRoute extends Component {
     constructor(props) {

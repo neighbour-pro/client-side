@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
 import { Button, Avatar, Badge, Icon, withBadge } from 'react-native-elements';
 import Loader from '../Loader/Loader';
+import UserService from '../../services/UserService';
 
 
 
 export default class ProfessionalFinal extends Component {
     constructor(props) {
         super(props);
-        this.userService = new UserService();
         this.state = {
             professional: false,
             loaded: false
         }
+        this.userService = new UserService();
     }
 
     componentDidMount() {
-        this.userService.getprofessionalById(this.props.isLoggedIn._id)
+        this.userService.getProfessionalById(this.props.isLoggedIn._id)
             .then(response => {
                 this.setState({
                     ...this.state,
@@ -35,18 +36,20 @@ export default class ProfessionalFinal extends Component {
                         <View>
 
                             <View style={styles.profileHeader}>
-                                <Image style={styles.imgProfile} source={{ uri: 'https://img.archilovers.com/projects/c_383_63fe7970-a3e6-45e2-ba7d-7bfe6563e6f4.jpg' }} />
-                                <Text style={styles.name}>Perfil PROFESSIONAL</Text>
+                                <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
+                                <Text style={styles.name}>{this.state.professional.name}</Text>
                                 <Text style={styles.info}>Niñera</Text>
                                 <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
                             </View>
                             <View style={styles.hrLine} />
 
-                            <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
+                            <Text style={styles.description}>{this.state.professional.description}</Text>
                             <Text style={styles.proFeature}>SERVICES</Text>
-                            <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
+                            <Text style={styles.description}>{this.state.professional.services}</Text>
                             <Text style={styles.proFeature}>REVIEWS</Text>
-                            <Text style={styles.description}>Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne assum electram expetendis, omittam deseruisse consequuntur ius an,</Text>
+                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews')}>
+                            <Text style={styles.description}>Show reviews</Text>
+                            </TouchableHighlight>
                             <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('professionaledit')}>
                                 <Text>Edit</Text>
                             </TouchableHighlight>

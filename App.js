@@ -33,13 +33,16 @@ export default class App extends Component {
         ...this.state,
         loaded: true,
         isLoggedIn: res.data
-      }, ()=>console.log(res))
+      })
     })
-    .catch(err => this.setState({
-      ...this.state,
-      loaded: true,
-      isLoggedIn: false
-    }));
+    .catch(err => {
+      console.log(err)
+      this.setState({
+        ...this.state,
+        loaded: true,
+        isLoggedIn: false
+      })
+    });
   }
 
   changeToLoggedMenu(user){
@@ -64,8 +67,8 @@ export default class App extends Component {
         {
           this.state.loaded ?
             this.state.isLoggedIn ?
-              <Nav changeMenu={()=>this.changeToGuestMenu()}/> :
-              <NavGuest changeMenu={(user)=>this.changeToLoggedMenu(user)}/>
+            <Nav changeMenu={()=>this.changeToGuestMenu()}/> :
+            <NavGuest changeMenu={(user)=>this.changeToLoggedMenu(user)}/>
             :
             <Loader/>
         }

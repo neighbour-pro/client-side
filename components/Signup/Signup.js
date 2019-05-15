@@ -32,7 +32,10 @@ export default class LoginView extends Component {
       role: this.state.selected
     })
       .then(response => this.props.changeMenu(response.data.user))
-      .catch(response => this.setState({ ...this.state, error: true }));
+      .catch(response => {
+        console.log(response);
+        this.setState({ ...this.state, error: true })
+      });
   }
 
   onValueChange(value) {

@@ -76,8 +76,8 @@ class App extends Component<Props> {
   render() {
     return (
       <MapView style={styles.map} initialRegion={{
-        latitude: 37.785834,
-        longitude: -122.406417,
+        latitude: 40.3925321,
+        longitude: -3.6982669,
         latitudeDelta: 1,
         longitudeDelta: 1
       }}>

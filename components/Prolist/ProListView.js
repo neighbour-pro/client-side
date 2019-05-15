@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, Alert } from
 import { Searchbar } from 'react-native-paper';
 
 import pStyles from './ProlistStyles'
+import UserService from '../../services/UserService';
+import Loader from '../Loader/Loader';
 
 export default class ProListView extends Component {
 
@@ -17,7 +19,38 @@ export default class ProListView extends Component {
         { id: '5', name: "User 5", image: "https://media.thetab.com/blogs.dir/4/files/2013/10/shez1-530x706.jpg", rating: 'Valoración: 4,5 de 5' },
       ],
       firstQuery: '',
+      loaded: false
     };
+    this.userService = new UserService();
+  }
+
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition((position) => {
+      // console.log(position);
+      this.setState({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        error: null
+      }, () => {
+        
+        this.userService.getProfessionalNearMe(this.state.longitude, this.state.latitude)
+          .then(response => {
+            console.log(response.data.users)
+            this.setState({
+              ...this.state,
+              professionalList: response.data.users,
+              loaded:true
+            })
+          })
+      });
+    //   this.mergeDirections()
+    }, (error) => {
+      console.log(error)
+      this.setState({ error: error.message, latitude: 40.3925321,
+        longitude: -3.6982669 }), {
+        enableHighAccuracy: false, timeout: 20000, maximumAge: 1000
+      }
+    })
   }
 
   clickEventListener = (item) => {
@@ -27,7 +60,10 @@ export default class ProListView extends Component {
   render() {
     const { firstQuery } = this.state;
     return (
-      <View style={styles.container}>
+      <React.Fragment>
+        {
+          this.state.loaded ?
+          <View style={styles.container}>
 
         <Searchbar
           style={styles.searchTop}
@@ -36,18 +72,18 @@ export default class ProListView extends Component {
           value={firstQuery}
         />
         
-        <FlatList style={styles.contentList} columnWrapperStyle={styles.listContainer} data={this.state.cardsData} keyExtractor={(item) => {
-          return item.id;
+        <FlatList style={styles.contentList} columnWrapperStyle={styles.listContainer} data={this.state.professionalList} keyExtractor={(item) => {
+          return item.professional_id;
         }}
 
-          renderItem={({ item }) => {
+          renderItem={( {item} ) => {
             return (
               <TouchableOpacity style={styles.cardPro} onPress={() => { this.clickEventListener(item) }}>
                 <Image style={styles.image} source={{ uri: item.image }} />
 
                 <View style={styles.cardProContent}>
                   <Text style={styles.name}>{item.name}</Text>
-                  <Text style={styles.rating}>{item.rating}</Text>
+                  <Text style={styles.rating}>Rating: {parseFloat(item.avg_rate).toFixed(2)}</Text>
                   <TouchableOpacity style={styles.btnCard} onPress={() => {
                     this.props.isLoggedIn ? 
                     this.clickEventListener(item) :
@@ -59,7 +95,10 @@ export default class ProListView extends Component {
               </TouchableOpacity>
             )
           }} />
-      </View>
+      </View> :
+      <Loader/>
+        }
+      </React.Fragment>
     );
   }
 }
