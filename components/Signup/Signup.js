@@ -3,22 +3,10 @@ import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Image, A
 
 import { Container, Header, Content, Icon, Picker, Form } from "native-base";
 
-import axios from 'axios';
+import AuthService from '../../services/AuthService';
 
 
 export default class LoginView extends Component {
-
-  doSignup() {
-    axios.post('http://localhost:5000/api/auth/signup', {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.pass_match,
-      role: this.state.selected
-    })
-      .then(response => this.props.changeMenu(response.data.user))
-      .catch(response => this.setState({ ...this.state, error: true }));
-  }
 
   constructor(props) {
     super(props);
@@ -30,8 +18,21 @@ export default class LoginView extends Component {
       email: '',
       password: '',
       pass_match: '',
-
     };
+
+    this.authService = new AuthService();
+  }
+
+  doSignup() {
+    this.authService.signup({
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      confirmPassword: this.state.pass_match,
+      role: this.state.selected
+    })
+      .then(response => this.props.changeMenu(response.data.user))
+      .catch(response => this.setState({ ...this.state, error: true }));
   }
 
   onValueChange(value) {

@@ -11,4 +11,12 @@ export default class AuthService{
     isLogged(){
         return this.service.get('/logged');
     }
+
+    signup(post){
+        return this.service.post('/signup', {...post});
+    }
+
+    login(post){
+        return this.service.post('/login', {...post});
+    }
 }

@@ -10,7 +10,7 @@ import {
   Alert,
   TouchableWithoutFeedback,
 } from 'react-native';
-import axios from 'axios';
+import AuthService from '../../services/AuthService';
 
 
 
@@ -23,16 +23,18 @@ export default class LoginView extends Component {
       password: '',
       error: false
     }
+    this.authService = new AuthService();
   }
 
   doLogin() {
-    axios.post('http://localhost:5000/api/auth/login', {
+    this.authService.login({
       email: this.state.email,
       password: this.state.password,
     })
-      .then(response => this.props.changeMenu(response.data.user))
+      .then(response => this.props.changeMenu(response.data))
       .catch(response => this.setState({ ...this.state, error: true }));
   }
+
 
   render() {
     return (
