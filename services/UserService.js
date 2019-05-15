@@ -19,4 +19,8 @@ export default class AuthService{
         return this.service.get(`/nearme/${lng}/${lat}/20000`)
     }
 
+    getReviewsFromProfessional(professionalId){
+        return this.service.get(`/professional/${professionalId}/reviews`)
+    }
+
 }

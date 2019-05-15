@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 
 import style from './RatingStyles'
+import UserService from '../../services/UserService';
+import Loader from '../Loader/Loader';
 
 
 export default class Rating extends Component {
@@ -16,57 +18,73 @@ export default class Rating extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            ratingData: [
-                { id: '1', image: "https://media.thetab.com/blogs.dir/4/files/2013/10/shez1-530x706.jpg", name: "Frank Odalthh", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-                { id: '2', image: "https://i.pinimg.com/originals/e3/ea/a5/e3eaa5fd55dc38d7ad2857dfde282376.jpg", name: "John DoeLink", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-                { id: '3', image: "https://media.thetab.com/blogs.dir/4/files/2013/10/shez1-530x706.jpg", name: "March SoulLaComa", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-                { id: '4', image: "https://i.pinimg.com/originals/e3/ea/a5/e3eaa5fd55dc38d7ad2857dfde282376.jpg", name: "Finn DoRemiFaso", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-                { id: '5', image: "https://media.thetab.com/blogs.dir/4/files/2013/10/shez1-530x706.jpg", name: "Maria More More", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-                { id: '6', image: "https://i.pinimg.com/originals/e3/ea/a5/e3eaa5fd55dc38d7ad2857dfde282376.jpg", name: "Clark June Boom!", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-                { id: '7', image: "https://media.thetab.com/blogs.dir/4/files/2013/10/shez1-530x706.jpg", name: "The googler", comment: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor." },
-            ]
+            loaded: false,
+            professional: false
         }
+        this.userService = new UserService();
     }
 
     componentDidMount(){
         console.log(this.props);
+        this.userService.getReviewsFromProfessional(this.props.nextProp)
+            .then(reviews => {
+                this.setState({
+                    ...this.state,
+                    professional: reviews.data.user,
+                    loaded: true
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState({
+                    ...this.state,
+                    loaded: true
+                })
+            })
     }
 
     render() {
         return (
-            <FlatList style={styles.main} data={this.state.ratingData} extraData={this.state} ItemSeparatorComponent={() => {
-                return (<View style={styles.separator} />)
-            }}
-                keyExtractor={(item) => {
-                    return item.id;
-                }}
-                renderItem={(item) => {
-                    const Review = item.item;
-                    return (
-                        <View style={styles.containerRating}>
-
-                            <TouchableOpacity onPress={() => { }}>
-                                <Image style={styles.image} source={{ uri: Review.image }} />
-                            </TouchableOpacity>
-
-                            <View style={styles.content}>
-                                <View style={styles.contentHeader}>
-                                    <Text style={{ fontWeight: 'bold' }}>
-                                        {Review.name}
-                                        <Text style={{ color: 'orange', }}>
-                                            *****
-                                         </Text>
-                                    </Text>
-                                    <Text style={styles.dateStyle}>
-                                        10 May.
-                                    </Text>
+            <React.Fragment>
+                {
+                    this.state.loaded ? 
+                    <FlatList style={styles.main} data={this.state.professional.reviews} extraData={this.state} ItemSeparatorComponent={() => {
+                        return (<View style={styles.separator} />)
+                    }}
+                        keyExtractor={(item) => {
+                            return item._id;
+                        }}
+                        renderItem={(item) => {
+                            console.log(item)
+                            const review = item.item;
+                            return (
+                                <View style={styles.containerRating}>
+        
+                                    <TouchableOpacity onPress={() => { }}>
+                                        <Image style={styles.image} source={{ uri: review.fromUserId.userPhoto }} />
+                                    </TouchableOpacity>
+        
+                                    <View style={styles.content}>
+                                        <View style={styles.contentHeader}>
+                                            <Text style={{ fontWeight: 'bold' }}>
+                                                {review.fromUserId.name}
+                                                <Text style={{ color: 'orange', }}>
+                                                    {'*'.repeat(review.stars)}
+                                                 </Text>
+                                            </Text>
+                                            <Text style={styles.dateStyle}>
+                                                {review.createdAt}
+                                            </Text>
+                                        </View>
+        
+                                        <Text>{review.comment}</Text>
+                                    </View>
                                 </View>
-
-                                <Text>{Review.comment}</Text>
-                            </View>
-                        </View>
-                    );
-                }} />
+                            );
+                        }} /> :
+                        <Loader/>
+                }
+            </React.Fragment>
         );
     }
 }

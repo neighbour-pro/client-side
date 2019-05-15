@@ -30,7 +30,6 @@ export default class ProListView extends Component {
 
         this.userService.getProfessionalNearMe(this.state.longitude, this.state.latitude)
           .then(response => {
-            console.log(response)
             this.setState({
               ...this.state,
               professionalList: response.data.users,
