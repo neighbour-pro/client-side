@@ -12,33 +12,32 @@ export default class ProfileRoute extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedUser: true,
-            view: 'map',
-
+            view: '',
         }
     }
+
+    redirectTo = where => this.setState({
+        ...this.state,
+        view: where
+    });
+    
     render() {
-        if (this.state.loggedUser) {
+        if (this.props.isLoggedIn) {
             switch (this.state.view) {
                 case 'rating':
                     return <Rating />
                 case 'prolist':
                     return <ProList />
-                case 'map':
-                    return <Map />
+
                 default:
                     return <Profile />
             }
         } else {
             switch (this.state.view) {
                 case 'signup':
-                    return <Signup />
-                case 'prolist':
-                    return <ProList />
-                case 'map':
-                    return <Map />
+                    return <Signup redirect={(where) => this.redirectTo(where)} />
                 default:
-                    return <Login />
+                    return <Login redirect={(where) => this.redirectTo(where)} />
             }
         }
     }

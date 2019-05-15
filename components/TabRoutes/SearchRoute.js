@@ -11,9 +11,11 @@ export default class SearchRoute extends Component {
     }
     render() {
         {
-            switch(this.state.view){
+            switch (this.state.view) {
+                case 'map':
+                    return <Map />
                 default:
-                return <ProListView/>
+                    return <ProListView />
             }
         }
     }

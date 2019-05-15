@@ -1,63 +1,77 @@
 import * as React from 'react';
 import { BottomNavigation, Text, Menu } from 'react-native-paper';
-import Login from '../Login/Login'
-import Rating from '../Rating/Rating'
-import Profile from '../Profiles/ClientFinal'
-// import ProList from '../Prolist/ProListView'
-import Map from '../Test/Test3'
-import Signup from '../Signup/Signup'
 import ProfileRoute from '../TabRoutes/ProfileRoute';
-import MessageRoute from '../TabRoutes/MessageRoute';
 import SearchRoute from '../TabRoutes/SearchRoute';
-import HelpRoute from '../UniqueChat/UniqueChat'
+import Login from '../Login/Login'
+import Signup from '../Signup/Signup'
 
+import AuthService from '../../services/AuthService';
+import Loader from '../Loader/Loader';
 
 // Routes
 
-const MapRoute = () => <Map/>;
-
-const LoginRoute = () => <Login/>;
-const SignupRoute = () => <Signup />;
-const ProListRoute = () => 'Hola mundo';
-const AddReviewRoute = () => 'Hola add review';
-const ReviewListRoute = () => 'Hola review list';
-
-const InboxRoute = () => <Rating />;
-const UniqueChatRoute = () => 'Unique Chat Rute';
-
-const ProfileRoutes = () => <ProfileRoute/>;
-const SearchRoutes = () => <SearchRoute/>;
-
-//
-
-
 export default class NavGuest extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            index: 0,
-            routes: [
-              { key: 'searchMap', title: 'Search', icon: 'search' },
-              { key: 'profile', title: 'Profile', icon: 'person' },
-            ],
-          };
-    }
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      index: 1,
+      routes: [
+        { key: 'searchMap', title: 'Search', icon: 'search' },
+        { key: 'profile', title: 'Profile', icon: 'person' },
+      ],
+      loaded: false,
+      isLoggedIn: false
+    };
+    this.authService = new AuthService();
+  }
 
+  componentDidMount() {
+    this.authService.isLogged()
+      .then(res => this.setState({
+        ...this.state,
+        loaded: true,
+        isLoggedIn: res.data.user
+      }))
+      .catch(err => {
+        this.setState({
+          ...this.state,
+          loaded: true,
+          isLoggedIn: false
+        })
+        this.props.changeMenu();
+      });
+  }
+
+  ProfileRoutes = () => <ProfileRoute isLoggedIn={this.state.isLoggedIn}/>;
+  SearchRoutes = () => <SearchRoute isLoggedIn={this.state.isLoggedIn}/>;
+  
   _handleIndexChange = index => this.setState({ index });
 
   _renderScene = BottomNavigation.SceneMap({
-    profile: ProfileRoutes,
-    searchMap: SearchRoutes,
+    profile: this.ProfileRoutes,
+    searchMap: this.SearchRoutes,
   });
 
   render() {
+
     return (
-      <BottomNavigation
-        navigationState={this.state}
-        onIndexChange={this._handleIndexChange}
-        renderScene={this._renderScene}
-      />
+      <React.Fragment>
+        {
+          this.state.loaded ?
+            this.state.isLoggedIn ?
+              <View>
+                <Text>You are not logged!</Text>
+              </View>
+              :
+              <BottomNavigation
+                navigationState={this.state}
+                onIndexChange={this._handleIndexChange}
+                renderScene={this._renderScene}
+              />
+            :
+            <Loader />
+        }
+      </React.Fragment>
     );
   }
 }

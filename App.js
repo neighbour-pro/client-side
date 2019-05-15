@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import AuthService from './services/AuthService';
 
 import Nav from './components/Nav/Nav';
 import NavGuest from './components/Nav/NavGuest';
@@ -21,17 +22,48 @@ export default class App extends Component {
       isLoggedIn: false,
       loaded: false
     }
+    this.authService = new AuthService();
   }
 
+  
+  componentDidMount(){
+    this.authService.isLogged()
+    .then(res => this.setState({
+      ...this.state,
+      loaded: true,
+      isLoggedIn: res.data.user
+    }))
+    .catch(err => this.setState({
+      ...this.state,
+      loaded: true,
+      isLoggedIn: false
+    }));
+  }
 
+  changeToLoggedMenu(user){
+    this.setState({
+      ...this.state,
+      isLoggedIn: user,
+      loaded: true
+    })
+  }
+
+  changeToGuestMenu(){
+    this.setState({
+      ...this.state,
+      isLoggedIn: false,
+      loaded: true
+    })
+  }
+  
   render() {
     return (
       <React.Fragment>
         {
           this.state.loaded ?
             this.state.isLoggedIn ?
-              <Nav /> :
-              <NavGuest />
+              <Nav changeMenu={()=>this.changeToGuestMenu()}/> :
+              <NavGuest changeMenu={(user)=>this.changeToLoggedMenu(user)}/>
             :
             <Loader/>
         }
