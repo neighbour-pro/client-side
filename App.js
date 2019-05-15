@@ -31,7 +31,7 @@ export default class App extends Component {
     .then(res => this.setState({
       ...this.state,
       loaded: true,
-      isLoggedIn: res.data.user
+      isLoggedIn: res.data
     }))
     .catch(err => this.setState({
       ...this.state,

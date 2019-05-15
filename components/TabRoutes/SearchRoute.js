@@ -13,9 +13,9 @@ export default class SearchRoute extends Component {
         {
             switch (this.state.view) {
                 case 'map':
-                    return <Map />
+                    return <Map isLoggedIn={this.state.isLoggedIn} changeTabIndex={(n)=>this.props.changeTabIndex(n)}/>
                 default:
-                    return <ProListView />
+                    return <ProListView isLoggedIn={this.state.isLoggedIn} changeTabIndex={(n)=>this.props.changeTabIndex(n)}/>
             }
         }
     }

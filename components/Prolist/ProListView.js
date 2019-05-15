@@ -48,7 +48,11 @@ export default class ProListView extends Component {
                 <View style={styles.cardProContent}>
                   <Text style={styles.name}>{item.name}</Text>
                   <Text style={styles.rating}>{item.rating}</Text>
-                  <TouchableOpacity style={styles.btnCard} onPress={() => this.clickEventListener(item)}>
+                  <TouchableOpacity style={styles.btnCard} onPress={() => {
+                    this.props.isLoggedIn ? 
+                    this.clickEventListener(item) :
+                    this.props.changeTabIndex(1)
+                  }}>
                     <Text style={styles.subBtnCard}>Visit profile</Text>
                   </TouchableOpacity>
                 </View>
