@@ -28,6 +28,10 @@ export default class Rating extends Component {
         }
     }
 
+    componentDidMount(){
+        console.log(this.props);
+    }
+
     render() {
         return (
             <FlatList style={styles.main} data={this.state.ratingData} extraData={this.state} ItemSeparatorComponent={() => {

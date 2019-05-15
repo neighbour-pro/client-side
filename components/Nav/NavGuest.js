@@ -25,11 +25,13 @@ export default class NavGuest extends React.Component {
 
   componentDidMount() {
     this.authService.isLogged()
-      .then(res => this.setState({
-        ...this.state,
-        loaded: true,
-        isLoggedIn: res.data.user
-      }))
+      .then(res => {
+        this.setState({
+          ...this.state,
+          loaded: true,
+          isLoggedIn: res.data
+        })
+      })
       .catch(err => {
         this.setState({
           ...this.state,

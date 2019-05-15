@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { BottomNavigation, Text, Menu } from 'react-native-paper';
+import { BottomNavigation, Text, Menu, View } from 'react-native-paper';
 import ProfileRoute from '../TabRoutes/ProfileRoute';
 import MessageRoute from '../TabRoutes/MessageRoute';
 import SearchRoute from '../TabRoutes/SearchRoute';
 import HelpRoute from '../TabRoutes/HelpRoute'
 import AuthService from '../../services/AuthService';
+
+import Loader from '../Loader/Loader';
 
 export default class Nav extends React.Component {
   constructor(props){
@@ -18,18 +20,20 @@ export default class Nav extends React.Component {
         { key: 'profile', title: 'Profile', icon: 'person' },
       ],
       loaded: false,
-      isLoggedIn: false
+      isLogged: false
     };
     this.authService = new AuthService();
   }
 
   componentDidMount() {
     this.authService.isLogged()
-      .then(res => this.setState({
-        ...this.state,
-        loaded: true,
-        isLoggedIn: res.data
-      }))
+      .then(res => {
+        this.setState({
+          ...this.state,
+          loaded: true,
+          isLoggedIn: res.data
+        })
+      })
       .catch(err => {
         this.setState({
           ...this.state,
@@ -51,7 +55,7 @@ export default class Nav extends React.Component {
   SearchRoutes = () => <SearchRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n)=>this.changeTabIndex(n)}/>
   HelpRoutes = () => <HelpRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n)=>this.changeTabIndex(n)}/>;
 
-  _handleIndexChange = index => this.setState({ index });
+  _handleIndexChange = index => this.setState({ ...this.state, index });
 
   _renderScene = BottomNavigation.SceneMap({
     profile: this.ProfileRoutes,
@@ -62,11 +66,23 @@ export default class Nav extends React.Component {
 
   render() {
     return (
-      <BottomNavigation
-        navigationState={this.state}
-        onIndexChange={this._handleIndexChange}
-        renderScene={this._renderScene}
-      />
+      <React.Fragment>
+        {
+          this.state.loaded ?
+            this.state.isLoggedIn ?
+              <BottomNavigation
+              navigationState={this.state}
+              onIndexChange={this._handleIndexChange}
+              renderScene={this._renderScene}
+              />
+              :
+              <View>
+                <Text>You are logged!</Text>
+              </View>
+            :
+            <Loader />
+        }
+      </React.Fragment>
     );
   }
 }

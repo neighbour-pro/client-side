@@ -23,11 +23,6 @@ export default class ProfileRoute extends Component {
     }
 
     componentDidMount(){
-        // ( this.props.isLoggedIn.role === 'Client') ? 
-        // this.setState({...this.state, view: 'clientprofile'}):
-        // this.setState({...this.state, view: 'professionalprofile'})
-
-        
         if(this.props.isLoggedIn){
             switch(this.props.isLoggedIn.role){
                 case 'Client':
@@ -55,7 +50,7 @@ export default class ProfileRoute extends Component {
         if (this.props.isLoggedIn) {
             switch (this.state.view) {
                 case 'reviews':
-                    return <Reviews redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <Rating redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'clientedit':
                     return <ClientEdit  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'clientprofile':
