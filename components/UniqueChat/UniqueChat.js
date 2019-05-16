@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Alert, ScrollView, TextInput, FlatList, Button } from 'react-native';
 import ConversationService from '../../services/ConversationService';
 import Loader from '../Loader/Loader';
+import io from 'socket.io-client';
+import config from '../../config/config';
 
 
 export default class Chat extends Component {
@@ -13,9 +15,29 @@ export default class Chat extends Component {
       loaded: false
     };
     this.conversationService = new ConversationService();
+    this.socket = io(config.SERVER_URL);
+    this.counter = 0;
   }
 
   componentDidMount() {
+    this.socket.emit('join', this.props.nextProps);
+    this.socket.on('msg', message => {
+      const newMessage = {
+        _id: ++this.counter,
+        text: message.message,
+        user_id: {
+          _id: message.user_id,
+          name: message.user_name
+        }
+      };
+
+      const conversation = this.state.conversation;
+      conversation.messages.push(newMessage);
+      this.setState({
+        ...this.state,
+        conversation
+      });
+    })
     this.getMessages();
   }
 
@@ -41,6 +63,13 @@ export default class Chat extends Component {
   }
 
   sendMessage = () => {
+    this.socket.emit('message', {
+      conversation_id: this.props.nextProps,
+      message: this.state.name_address,
+      user_name: this.props.isLoggedIn.name,
+      user_id: this.props.isLoggedIn._id
+    });
+
     const post = {
       text: this.state.name_address,
       user_id: this.props.isLoggedIn._id,

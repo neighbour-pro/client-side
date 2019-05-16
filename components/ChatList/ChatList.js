@@ -17,6 +17,7 @@ export default class ChatList extends Component {
   }
 
   componentDidMount(){
+    console.log(this.props)
     this.conversationService.getConversations(this.props.isLoggedIn._id)
       .then(conversations => {
         this.setState({
@@ -44,13 +45,14 @@ export default class ChatList extends Component {
         }}
 
           renderItem={({ item }) => {
+            console.log(item)
             return (
               <TouchableOpacity style={styles.cardPro} onPress={() => { this.clickEventListener(item) }}>
                 <Image style={styles.image} source={{ uri: item.professional_id.userPhoto }} />
 
                 <View style={styles.cardProContent}>
                   <Text style={styles.name}>{item.professional_id.name}</Text>
-                  <TouchableOpacity style={styles.btnCard} onPress={() => this.props.redirectTo('uniquechat', {conversation: item})}>
+                  <TouchableOpacity style={styles.btnCard} onPress={() => this.props.redirectTo('uniquechat', item._id)}>
                     <Text style={styles.subBtnCard}>Go to chat</Text>
                   </TouchableOpacity>
                 </View>

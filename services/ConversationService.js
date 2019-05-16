@@ -1,9 +1,10 @@
 import axios from 'axios';
+import config from '../config/config';
 
 export default class ConversationService{
     constructor(){
         this.service = axios.create({
-            baseURL: 'http://localhost:5000/api/conversation',
+            baseURL: config.SERVER_URL+'/api/conversation',
             withCredentials: true
         });
     }
