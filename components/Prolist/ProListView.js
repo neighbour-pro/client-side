@@ -5,7 +5,7 @@ import { Searchbar } from 'react-native-paper';
 import pStyles from './ProlistStyles'
 import UserService from '../../services/UserService';
 import Loader from '../Loader/Loader';
-// import HeaderExample from '../Test/Test2';
+import TopBar from '../TopBar/TopBar';
 
 export default class ProListView extends Component {
 
@@ -57,7 +57,7 @@ export default class ProListView extends Component {
         {
           this.state.loaded ?
             <View style={styles.container}>
-            {/* <HeaderExample/> */}
+            <TopBar noOffer noBack/>
               <Searchbar
                 style={styles.searchTop}
                 placeholder="Search professionals nearby..."

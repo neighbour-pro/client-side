@@ -4,6 +4,7 @@ import { Button, Avatar, Badge, Icon, withBadge } from 'react-native-elements';
 
 import UserService from '../../services/UserService';
 import Loader from '../Loader/Loader';
+import TopBar from '../TopBar/TopBar';
 
 
 export default class ClientFinal extends Component {
@@ -31,6 +32,8 @@ export default class ClientFinal extends Component {
     render() {
         return (
             <React.Fragment>
+                    <TopBar noOffer noBack/>
+
                 {
                     this.state.loaded ?
                         <View>

@@ -33,48 +33,58 @@ export default style = {
       marginRight: 20,
       marginTop: 20,
       // backgroundColor: 'rgba(255, 255, 255, 0.7)',
-      backgroundColor: '#6200ee',
+      backgroundColor: '#fafafaaa',
       padding: 10,
       flexDirection: 'row',
       borderRadius: 15,
+      borderTopLeftRadius: 90,
+      borderBottomLeftRadius: 90,
 
     },
   
     name: {
       fontSize: 18,
       flex: 1,
-      color: "white",
+      color: "#333",
       fontWeight: 'bold'
     },
     rating: {
       fontSize: 14,
       flex: 1,
       alignSelf: 'flex-start',
-      color: "orange"
+      // color: "hsl(30, 50%, 50%)"
+      color: "#333a"
     },
     btnCard: {
       marginTop: 10,
       height: 25,
-      width: 'auto',
+      width: '100%',
       padding: 3,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 20,
-      backgroundColor: "white",
+      backgroundColor: "#6200ee",
       borderWidth: 2,
-      borderColor: "white",
-      borderColor: 'transparent',
+      borderColor: "#6200ee",
+      // borderColor: 'transparent',
       color: "white",
     },
     subBtnCard: {
-      color: "#333",
+      color: "white",
       fontWeight: '600',
       fontSize: 12,
       textTransform: 'uppercase',
     },
     searchTop: {
-      marginTop: 20,
-  
+      paddingLeft: 10,
+      marginTop: 0,
+      shadowOpacity: 0,
+      marginHorizontal: 21,
+      marginTop: 15,
+      borderRadius: 30,
+      backgroundColor: '#fafafacc',
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
     },
   }

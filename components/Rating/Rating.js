@@ -11,6 +11,7 @@ import {
 import style from './RatingStyles'
 import UserService from '../../services/UserService';
 import Loader from '../Loader/Loader';
+import TopBar from '../TopBar/TopBar';
 
 
 export default class Rating extends Component {
@@ -46,6 +47,7 @@ export default class Rating extends Component {
     render() {
         return (
             <React.Fragment>
+                <TopBar noOffer redirectTo={(where, next) => this.props.redirectTo(where, next)} route='professional' nextProps={this.state.professional._id}/>
                 {
                     this.state.loaded ? 
                     <FlatList style={styles.main} data={this.state.professional.reviews} extraData={this.state} ItemSeparatorComponent={() => {

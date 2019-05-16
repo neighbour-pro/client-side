@@ -4,6 +4,8 @@ import ConversationService from '../../services/ConversationService';
 import Loader from '../Loader/Loader';
 import io from 'socket.io-client';
 import config from '../../config/config';
+import TopBar from '../TopBar/TopBar'
+
 
 
 export default class Chat extends Component {
@@ -59,8 +61,8 @@ export default class Chat extends Component {
 
   getMessages = () => {
     return this.conversationService.getConversationMessages(this.props.nextProps)
-    .then(conversation => {
-      console.log(conversation.data.conversation)
+      .then(conversation => {
+        console.log(conversation.data.conversation)
         this.setState({
           ...this.state,
           conversation: conversation.data.conversation,
@@ -92,42 +94,51 @@ export default class Chat extends Component {
 
     return (
       <React.Fragment>
+
+
         {
           this.state.loaded ?
-            <View style={styles.container}>
-              <FlatList style={styles.list}
-                data={this.state.conversation.messages}
-                keyExtractor={(item) => {
-                  return item._id;
-                }}
-                renderItem={(message) => {
-                  console.log(item);
-                  const item = message.item;
-                  let inMessage = item.user_id !== this.props.isLoggedIn._id;
-                  let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
-                  return (
-                    <View style={[styles.item, itemStyle]}>
-                      {!inMessage && this.renderDate(item.date)}
-                      <View style={[styles.balloon]}>
-                        <Text>{item.text}</Text>
+            <React.Fragment>
+              {this.props.isLoggedIn.role === 'Professional' ? <TopBar redirectTo={(where, next) => this.props.redirectTo(where, next)}/> : <TopBar noOffer redirectTo={(where, next) => this.props.redirectTo(where, next)}/>}
+              <View style={styles.container}>
+                <FlatList
+                  ref='flatList'
+                  onContentSizeChange={() => this.refs.flatList.scrollToEnd()}
+                  style={styles.list}
+                  data={this.state.conversation.messages}
+                  keyExtractor={(item) => {
+                    return item._id;
+                  }}
+                  renderItem={(message) => {
+                    console.log(item);
+                    const item = message.item;
+                    let inMessage = item.user_id !== this.props.isLoggedIn._id;
+                    let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
+                    return (
+                      <View style={[styles.item, itemStyle]}>
+                        {!inMessage && this.renderDate(item.date)}
+                        <View style={[styles.balloon]}>
+                          <Text>{item.text}</Text>
+                        </View>
+                        {inMessage && this.renderDate(item.date)}
                       </View>
-                      {inMessage && this.renderDate(item.date)}
-                    </View>
-                  )
-                }} />
-              <View style={styles.footer}>
-                <View style={styles.inputContainer}>
-                  <TextInput style={styles.inputs}
-                    placeholder="Write a message..."
-                    underlineColorAndroid='transparent'
-                    onChangeText={(name_address) => this.setState({ name_address })} />
-                </View>
+                    )
+                  }} />
+                <View style={styles.footer}>
+                  <View style={styles.inputContainer}>
+                    <TextInput style={styles.inputs}
+                      placeholder="Write a message..."
+                      underlineColorAndroid='transparent'
+                      onChangeText={(name_address) => this.setState({ name_address })} />
+                  </View>
 
-                <TouchableOpacity style={styles.btnSend} onPress={() => this.sendMessage()}>
-                  <Image source={{ uri: "https://png.icons8.com/small/75/ffffff/filled-sent.png" }} style={styles.iconSend} />
-                </TouchableOpacity>
+                  <TouchableOpacity style={styles.btnSend} onPress={() => this.sendMessage()}>
+                    <Image source={{ uri: "https://png.icons8.com/small/75/ffffff/filled-sent.png" }} style={styles.iconSend} />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View> :
+            </React.Fragment> 
+            :
             <Loader />
         }
       </React.Fragment>

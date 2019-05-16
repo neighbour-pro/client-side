@@ -4,6 +4,7 @@ import { Searchbar } from 'react-native-paper';
 
 import pStyles from './ChatListStyles'
 import ConversationService from '../../services/ConversationService';
+import TopBar from '../TopBar/TopBar'
 
 export default class ChatList extends Component {
 
@@ -32,6 +33,7 @@ export default class ChatList extends Component {
     const { firstQuery } = this.state;
     return (
       <View style={styles.container}>
+      <TopBar noOffer noBack/>
 
         <Searchbar
           style={styles.searchTop}

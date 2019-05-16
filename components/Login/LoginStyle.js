@@ -70,4 +70,16 @@ export default Styles = {
     width: 120,
     height: 120,
   },
+  bottomText: {
+    marginTop: 15,
+    fontSize: 18,
+    height: 25,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30,
+  }
 }

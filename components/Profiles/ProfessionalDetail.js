@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableHighlight } from 'react-native';
 import Loader from '../Loader/Loader';
 import UserService from '../../services/UserService';
+import TopBar from '../TopBar/TopBar';
+
+
 
 export default class ProfessionalDetail extends Component {
     
@@ -31,9 +34,10 @@ export default class ProfessionalDetail extends Component {
     render() {
         return (
             <React.Fragment>
+                <TopBar noOffer redirectTo={(where, next) => this.props.redirectTo(where, next)} route=''/>
                 {
                     this.state.loaded ?
-                        <View>
+                    <ScrollView contentContainerStyle={{flexGrow:1, justifyContent: 'space-between',}}>
 
                             <View style={styles.profileHeader}>
                                 <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
@@ -42,11 +46,11 @@ export default class ProfessionalDetail extends Component {
                                 <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
                             </View>
                             <View style={styles.hrLine} />
-
-                            {/* <Text style={styles.description}>{this.state.professional.description}</Text>
+                            
+                            <Text style={styles.description}>{this.state.professional.description}</Text>
                             <Text style={styles.proFeature}>SERVICES</Text>
                             <Text style={styles.description}>{this.state.professional.services}</Text>
-                            <Text style={styles.proFeature}>REVIEWS</Text> */}
+                            <Text style={styles.proFeature}>REVIEWS</Text>
                             <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews', this.state.professional._id)}>
                             <Text style={styles.description}>Show reviews</Text>
                             </TouchableHighlight>
@@ -58,7 +62,7 @@ export default class ProfessionalDetail extends Component {
                             </View>
 
 
-                        </View> :
+                        </ScrollView> :
                         <Loader />
                 }
             </React.Fragment>

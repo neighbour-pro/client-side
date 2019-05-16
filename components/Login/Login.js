@@ -69,12 +69,12 @@ export default class LoginView extends Component {
           }
         </View>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore-password')}>
-          <Text>Forgot your password?</Text>
+        <TouchableHighlight onPress={() => this.onClickListener('restore-password')}>
+          <Text style={styles.bottomText}>Forgot your password?</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirect('signup')}>
-          <Text>Create Account</Text>
+        <TouchableHighlight onPress={() => this.props.redirect('signup')}>
+          <Text style={styles.bottomText}>Create Account</Text>
         </TouchableHighlight>
       </View>
     );

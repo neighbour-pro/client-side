@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, TouchableHighlight } f
 import { Button, Avatar, Badge, Icon, withBadge } from 'react-native-elements';
 import Loader from '../Loader/Loader';
 import UserService from '../../services/UserService';
+import { ScrollView } from 'react-native-gesture-handler';
+import TopBar from '../TopBar/TopBar';
 
 
 
@@ -30,38 +32,40 @@ export default class ProfessionalFinal extends Component {
 
     render() {
         return (
-            <React.Fragment>
+
+                <React.Fragment>
+                    <TopBar noOffer noBack/>
                 {
                     this.state.loaded ?
-                        <View>
+                            <ScrollView contentContainerStyle={{flexGrow:1, justifyContent: 'space-between',}}>
+                                <View style={styles.profileHeader}>
+                                    <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
+                                    <Text style={styles.name}>{this.state.professional.name}</Text>
+                                    <Text style={styles.info}>Niñera</Text>
+                                    <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
+                                </View>
+                                <View style={styles.hrLine} />
 
-                            <View style={styles.profileHeader}>
-                                <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
-                                <Text style={styles.name}>{this.state.professional.name}</Text>
-                                <Text style={styles.info}>Niñera</Text>
-                                <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
-                            </View>
-                            <View style={styles.hrLine} />
+                                <Text style={styles.description}>{this.state.professional.description}</Text>
+                                <Text style={styles.proFeature}>SERVICES</Text>
+                                <Text style={styles.description}>{this.state.professional.services}</Text>
+                                <Text style={styles.proFeature}>REVIEWS</Text>
+                                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews')}>
+                                    <Text style={styles.description}>Show reviews</Text>
+                                </TouchableHighlight>
+                                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('professionaledit')}>
+                                    <Text>Edit</Text>
+                                </TouchableHighlight>
 
-                            <Text style={styles.description}>{this.state.professional.description}</Text>
-                            <Text style={styles.proFeature}>SERVICES</Text>
-                            <Text style={styles.description}>{this.state.professional.services}</Text>
-                            <Text style={styles.proFeature}>REVIEWS</Text>
-                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews')}>
-                            <Text style={styles.description}>Show reviews</Text>
-                            </TouchableHighlight>
-                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('professionaledit')}>
-                                <Text>Edit</Text>
-                            </TouchableHighlight>
+                                <View style={{ width: '50%' }}>
+                                </View>
+                            </ScrollView>
+                        :
 
-                            <View style={{ width: '50%' }}>
-                            </View>
-
-
-                        </View> :
                         <Loader />
                 }
-            </React.Fragment>
+</React.Fragment>
+            //</View>
 
         );
     }
@@ -69,10 +73,6 @@ export default class ProfessionalFinal extends Component {
 
 const styles = StyleSheet.create({
 
-    // profileHeader: {
-    //     backgroundColor: 'red',
-
-    // },
     imgProfile: {
         width: 170,
         height: 170,
