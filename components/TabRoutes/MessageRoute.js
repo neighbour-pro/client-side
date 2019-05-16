@@ -5,6 +5,7 @@ import ChatList from '../ChatList/ChatList';
 import UniqueChat from '../UniqueChat/UniqueChat';
 import OfferList from '../Offer/OfferList';
 import MakeOffer from '../Offer/MakeOffer';
+import ConversationService from '../../services/ConversationService';
 
 
 
@@ -14,16 +15,30 @@ export default class MessageRoute extends Component {
         this.state = {
             view: '',
         }
+        this.conversationService = new ConversationService();
     }
 
-    componentDidMount(){
-        if(this.props.nextProps && this.props.nextProps.professional_id){
-            
-            this.setState({
-                ...this.state,
-                view: 'uniquechat',
-                nextProps: this.props.nextProps.professional_id
-            });
+    componentDidMount() {
+        if (this.props.nextProps && this.props.nextProps.professional_id) {
+            this.conversationService.getConversationBetweenUsers(this.props.isLoggedIn._id, this.props.nextProps.professional_id)
+                .then(conversation => {
+                    this.setState({
+                        ...this.state,
+                        view: 'uniquechat',
+                        nextProps: conversation.data.conversation._id
+                    });
+                })
+                .catch(() => {
+                    this.conversationService.createConversation(this.props.isLoggedIn._id, this.props.nextProps.professional_id)
+                        .then(conversation => {
+                            this.setState({
+                                ...this.state,
+                                view: 'uniquechat',
+                                nextProps: conversation.data._id
+                            });
+                        })
+                })
+                .catch(err => console.log(err));
             return;
         }
 
@@ -37,27 +52,27 @@ export default class MessageRoute extends Component {
         this.setState({
             ...this.state,
             view: where,
-            nextProp: next
+            nextProps: next
         })
     }
 
     render() {
         {
-            switch(this.state.view){
+            switch (this.state.view) {
                 case 'addreview':
-                return <AddReview/>
+                    return <AddReview redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.state.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
                 case 'offerlist':
-                return <OfferList/>
+                    return <OfferList redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.state.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
                 case 'acceptedoffer':
-                return <AcceptedOffer/>
+                    return <AcceptedOffer redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.state.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
                 case 'makeoffer':
-                return <MakeOffer/>
+                    return <MakeOffer redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.props.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
                 case 'uniquechat':
-                return <UniqueChat/>
+                    return <UniqueChat redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.state.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
                 case 'chatlist':
-                return <ChatList/>
+                    return <ChatList redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.state.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
                 default:
-                return <ChatList/>
+                    return <ChatList redirectTo={(where, props) => this.redirectTo(where, props)} nextProps={this.state.nextProps} isLoggedIn={this.props.isLoggedIn} changeMenu={(user) => this.props.changeMenu(user)} changeTabIndex={(n, props) => this.props.changeTabIndex(n, props)} />
             }
         }
     }
