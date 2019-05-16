@@ -24,4 +24,8 @@ export default class UserService{
         return this.service.get(`/professional/${professionalId}/reviews`)
     }
 
+    updateClient(clientId, post){
+        return this.service.put(`/update/${clientId}`, post);
+    }
+
 }
