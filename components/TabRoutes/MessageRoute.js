@@ -19,9 +19,11 @@ export default class MessageRoute extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.nextProps);
         if (this.props.nextProps && this.props.nextProps.professional_id) {
             this.conversationService.getConversationBetweenUsers(this.props.isLoggedIn._id, this.props.nextProps.professional_id)
                 .then(conversation => {
+                    console.log(conversation)
                     this.setState({
                         ...this.state,
                         view: 'uniquechat',
@@ -31,6 +33,7 @@ export default class MessageRoute extends Component {
                 .catch(() => {
                     this.conversationService.createConversation(this.props.isLoggedIn._id, this.props.nextProps.professional_id)
                         .then(conversation => {
+                            console.log('Created: '+conversation)
                             this.setState({
                                 ...this.state,
                                 view: 'uniquechat',

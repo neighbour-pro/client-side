@@ -20,8 +20,10 @@ export default class Chat extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.nextProps)
     this.socket.emit('join', this.props.nextProps);
     this.socket.on('msg', message => {
+      console.log('Socket:', message)
       const newMessage = {
         _id: ++this.counter,
         text: message.message,
@@ -35,10 +37,16 @@ export default class Chat extends Component {
       conversation.messages.push(newMessage);
       this.setState({
         ...this.state,
-        conversation
+        conversation,
       });
+      // this.getMessages();
     })
+    this.socket.open();
     this.getMessages();
+  }
+
+  componentWillUnmount() {
+    this.socket.close();
   }
 
   renderDate = (date) => {
@@ -52,6 +60,7 @@ export default class Chat extends Component {
   getMessages = () => {
     return this.conversationService.getConversationMessages(this.props.nextProps)
     .then(conversation => {
+      console.log(conversation.data.conversation)
         this.setState({
           ...this.state,
           conversation: conversation.data.conversation,
@@ -72,7 +81,7 @@ export default class Chat extends Component {
 
     const post = {
       text: this.state.name_address,
-      user_id: this.props.isLoggedIn._id,
+      userId: this.props.isLoggedIn._id,
     }
     this.conversationService.sendMessage(this.props.nextProps, post)
       .then(res => this.getMessages())
@@ -92,7 +101,7 @@ export default class Chat extends Component {
                   return item._id;
                 }}
                 renderItem={(message) => {
-                  // console.log(item);
+                  console.log(item);
                   const item = message.item;
                   let inMessage = item.user_id !== this.props.isLoggedIn._id;
                   let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
