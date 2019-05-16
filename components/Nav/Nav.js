@@ -20,7 +20,8 @@ export default class Nav extends React.Component {
         { key: 'profile', title: 'Profile', icon: 'person' },
       ],
       loaded: false,
-      isLogged: false
+      isLogged: false,
+      nextProps: null
     };
     this.authService = new AuthService();
   }
@@ -44,16 +45,17 @@ export default class Nav extends React.Component {
       });
   }
 
-  changeTabIndex = (n) => this.setState({
+  changeTabIndex = (n, props) => this.setState({
     ...this.state,
-    index: n
+    index: n,
+    nextProps: props
   })
 
   
-  ProfileRoutes = () => <ProfileRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n)=>this.changeTabIndex(n)} />
-  MessageRoutes = () => <MessageRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n)=>this.changeTabIndex(n)} />
-  SearchRoutes = () => <SearchRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n)=>this.changeTabIndex(n)}/>
-  HelpRoutes = () => <HelpRoute isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n)=>this.changeTabIndex(n)}/>;
+  ProfileRoutes = () => <ProfileRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)} />
+  MessageRoutes = () => <MessageRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)} />
+  SearchRoutes = () => <SearchRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)}/>
+  HelpRoutes = () => <HelpRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)}/>;
 
   _handleIndexChange = index => this.setState({ ...this.state, index });
 

@@ -50,7 +50,7 @@ export default class ProfessionalDetail extends Component {
                             <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews', this.state.professional._id)}>
                             <Text style={styles.description}>Show reviews</Text>
                             </TouchableHighlight>
-                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('', {professional_id: this.state.professional._id})}>
+                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.changeTabIndex(2, {professional_id: this.state.professional._id})}>
                                 <Text>Send message</Text>
                             </TouchableHighlight>
 

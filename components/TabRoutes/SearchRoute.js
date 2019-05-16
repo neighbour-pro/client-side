@@ -27,11 +27,11 @@ export default class SearchRoute extends Component {
                 case 'reviews':
                     return <Rating nextProp={this.state.nextProp} redirectTo={(where,next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn}/>
                 case 'professional':
-                    return <ProfessionalDetail nextProp={this.state.nextProp} isLoggedIn={this.props.isLoggedIn} changeTabIndex={(n)=>this.props.changeTabIndex(n)} redirectTo={(where, next) => this.redirectTo(where, next)}/>
+                    return <ProfessionalDetail nextProp={this.state.nextProp} isLoggedIn={this.props.isLoggedIn} changeTabIndex={(n, props)=>this.props.changeTabIndex(n, props)} redirectTo={(where, next) => this.redirectTo(where, next)}/>
                 case 'map':
                     return <Map nextProp={this.state.nextProp} isLoggedIn={this.props.isLoggedIn} changeTabIndex={(n)=>this.props.changeTabIndex(n)} redirectTo={(where, next) => this.redirectTo(where, next)}/>
                 default:
-                    return <ProListView nextProp={this.state.nextProp} isLoggedIn={this.props.isLoggedIn} changeTabIndex={(n)=>this.props.changeTabIndex(n)} redirectTo={(where, next) => this.redirectTo(where, next)}/>
+                    return <ProListView nextProp={this.state.nextProp} isLoggedIn={this.props.isLoggedIn} changeTabIndex={(n, props)=>this.props.changeTabIndex(n, props)} redirectTo={(where, next) => this.redirectTo(where, next)}/>
             }
     }
 

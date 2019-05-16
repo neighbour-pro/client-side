@@ -15,6 +15,32 @@ export default class MessageRoute extends Component {
             view: '',
         }
     }
+
+    componentDidMount(){
+        if(this.props.nextProps && this.props.nextProps.professional_id){
+            
+            this.setState({
+                ...this.state,
+                view: 'uniquechat',
+                nextProps: this.props.nextProps.professional_id
+            });
+            return;
+        }
+
+        this.setState({
+            ...this.state,
+            view: 'chatlist'
+        });
+    }
+
+    redirectTo = (where, next) => {
+        this.setState({
+            ...this.state,
+            view: where,
+            nextProp: next
+        })
+    }
+
     render() {
         {
             switch(this.state.view){

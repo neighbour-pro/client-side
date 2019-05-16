@@ -79,7 +79,7 @@ export default class ProListView extends Component {
                         <TouchableHighlight style={styles.btnCard} onPress={() => {
                           this.props.isLoggedIn ?
                             this.props.redirectTo('professional', item.professional_id) :
-                            this.props.changeTabIndex(1)
+                            this.props.changeTabIndex(1, {professional_id: item.professional_id})
                         }}>
                           <Text style={styles.subBtnCard}>Visit profile</Text>
                         </TouchableHighlight>
