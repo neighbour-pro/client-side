@@ -16,16 +16,7 @@ export default class Chat extends Component {
   }
 
   componentDidMount() {
-    this.conversationService.getConversationMessages(this.props.nextProps)
-    .then(conversation => {
-      console.log(conversation);
-        this.setState({
-          ...this.state,
-          conversation: conversation.data.conversation,
-          loaded: true
-        })
-      })
-      .catch(err => console.log(err));
+    this.getMessages();
   }
 
   renderDate = (date) => {
@@ -34,6 +25,29 @@ export default class Chat extends Component {
         {date}
       </Text>
     );
+  }
+
+  getMessages = () => {
+    return this.conversationService.getConversationMessages(this.props.nextProps)
+    .then(conversation => {
+        this.setState({
+          ...this.state,
+          conversation: conversation.data.conversation,
+          loaded: true,
+          name_address: ''
+        })
+      })
+      .catch(err => console.log(err));
+  }
+
+  sendMessage = () => {
+    const post = {
+      text: this.state.name_address,
+      user_id: this.props.isLoggedIn._id,
+    }
+    this.conversationService.sendMessage(this.props.nextProps, post)
+      .then(res => this.getMessages())
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -71,7 +85,7 @@ export default class Chat extends Component {
                     onChangeText={(name_address) => this.setState({ name_address })} />
                 </View>
 
-                <TouchableOpacity style={styles.btnSend}>
+                <TouchableOpacity style={styles.btnSend} onPress={() => this.sendMessage()}>
                   <Image source={{ uri: "https://png.icons8.com/small/75/ffffff/filled-sent.png" }} style={styles.iconSend} />
                 </TouchableOpacity>
               </View>

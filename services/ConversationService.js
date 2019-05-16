@@ -24,6 +24,10 @@ export default class ConversationService{
         return this.service.get(`/${conversationId}/messageList`);
     }
 
+    sendMessage(conversationId, post){
+        return this.service.post(`/${conversationId}/addMessage`, post)
+    }
+
     
 
 }
