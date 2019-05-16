@@ -14,10 +14,10 @@ export default class Nav extends React.Component {
     this.state = {
       index: 1,
       routes: [
-        { key: 'help', title: 'Help', icon: 'help' },
-        { key: 'searchMap', title: 'Search', icon: 'search' },
-        { key: 'inbox', title: 'Messages', icon: 'chat' },
-        { key: 'profile', title: 'Profile', icon: 'person' },
+        { key: 'help', title: 'Help', icon: 'help', color: '#5432ed' },
+        { key: 'searchMap', title: 'Search', icon: 'search', color: '#5432ed' },
+        { key: 'inbox', title: 'Messages', icon: 'chat', color: '#5432ed' },
+        { key: 'profile', title: 'Profile', icon: 'person', color: '#5432ed' },
       ],
       loaded: false,
       isLogged: false,

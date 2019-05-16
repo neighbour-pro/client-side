@@ -14,8 +14,8 @@ export default class NavGuest extends React.Component {
     this.state = {
       index: 1,
       routes: [
-        { key: 'searchMap', title: 'Search', icon: 'search' },
-        { key: 'profile', title: 'Profile', icon: 'person' },
+        { key: 'searchMap', title: 'Search', icon: 'search'},
+        { key: 'profile', title: 'Profile', icon: 'person'},
       ],
       loaded: false,
       isLoggedIn: false

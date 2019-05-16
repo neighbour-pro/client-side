@@ -1,40 +1,24 @@
-import React, { Component } from 'react';
-import { Container, Header, Left, Body, Right, Button, Icon, Title, Segment, Content, Text } from 'native-base';
+import {Container, Header, Title, Button, Icon} from 'native-base';
+import React, {Component, View} from 'react-native';
+​
+export default class HeaderExample extends Component {
+    render() {
+        return (
+            <View>
+              <Container>
+                <Header>
+                    <Button transparent>
+                        <Icon name="ios-arrow-left" />
+                    </Button>
 
-export default class SegmentOutsideHeaderExample extends Component {
-  render() {
-    return (
-      <Container>
-        <Header hasSegment>
-          <Left>
-            <Button  transparent>
-              <Icon name="arrow-back" />
-            </Button>
-          </Left>
-          <Body>
-            <Title>Segments</Title>
-          </Body>
-          <Right>
-            <Button transparent>
-              <Icon name="search" />
-            </Button>
-          </Right>
-        </Header>
-        <Segment>
-          <Button first>
-            <Text>Puppies</Text>
-          </Button>
-          <Button>
-            <Text>Kittens</Text>
-          </Button>
-          <Button last active>
-            <Text>Cubs</Text>
-          </Button>
-        </Segment>
-        <Content padder>
-          <Text>Awesome segment</Text>
-        </Content>
-      </Container>
-    );
-}
+                    <Title>Header</Title>
+
+                    <Button transparent>
+                        <Icon name="navicon"/>
+                    </Button>
+                </Header>
+            </Container>
+            </View>
+        );
+    }
 }

@@ -2,7 +2,7 @@ export default style = {
     container: {
       flex: 1,
       marginTop: 40,
-      backgroundColor: "#ebf0f7"
+      backgroundColor: "#d0d8e9"
     },
     contentList: {
       flex: 1,
@@ -16,7 +16,7 @@ export default style = {
       height: 90,
       borderRadius: 45,
       borderWidth: 2,
-      borderColor: "#ebf0f7"
+      borderColor: "white"
     },
   
     cardPro: {
@@ -32,40 +32,46 @@ export default style = {
       marginLeft: 20,
       marginRight: 20,
       marginTop: 20,
-      backgroundColor: "white",
+      // backgroundColor: 'rgba(255, 255, 255, 0.7)',
+      backgroundColor: '#6200ee',
       padding: 10,
       flexDirection: 'row',
-      borderRadius: 30,
+      borderRadius: 15,
+
     },
   
     name: {
       fontSize: 18,
       flex: 1,
-      color: "#333",
+      color: "white",
       fontWeight: 'bold'
     },
     rating: {
       fontSize: 14,
       flex: 1,
-      alignSelf: 'center',
+      alignSelf: 'flex-start',
       color: "orange"
     },
     btnCard: {
       marginTop: 10,
-      height: 35,
-      width: 100,
-      padding: 10,
+      height: 25,
+      width: 'auto',
+      padding: 3,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: 30,
+      borderRadius: 20,
       backgroundColor: "white",
-      borderWidth: 1,
-      borderColor: "#333",
+      borderWidth: 2,
+      borderColor: "white",
+      borderColor: 'transparent',
+      color: "white",
     },
     subBtnCard: {
       color: "#333",
+      fontWeight: '600',
       fontSize: 12,
+      textTransform: 'uppercase',
     },
     searchTop: {
       marginTop: 20,

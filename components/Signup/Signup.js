@@ -5,6 +5,9 @@ import { Container, Header, Content, Icon, Picker, Form } from "native-base";
 
 import AuthService from '../../services/AuthService';
 
+const logo = require ('../../src/images/nlogo.png');
+import SignupStyles from './SignupStyles'
+
 
 export default class LoginView extends Component {
 
@@ -47,6 +50,9 @@ export default class LoginView extends Component {
   render() {
     return (
       <View style={styles.container}>
+       <View style={styles.logo}>
+        <Image style={styles.logoImg} source={logo}/>
+        </View>
         <Text style={styles.welcome}>Create a new account</Text>
 
         <View style={styles.inputContainer}>
@@ -105,7 +111,7 @@ export default class LoginView extends Component {
         {
           this.state.error ?
             <View>
-              <Text>All fields are required</Text>
+              <Text style={styles.errMsg}>All fields are required</Text>
             </View>
             :
             null
@@ -119,66 +125,5 @@ export default class LoginView extends Component {
     );
   }
 }
+const styles = StyleSheet.create(SignupStyles); 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-  },
-  welcome: {
-    fontSize: 25,
-    textAlign: 'center',
-    margin: 20,
-  },
-  inputContainer: {
-    borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: '#FFFFFF',
-    flex: 1,
-  },
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 15,
-    justifyContent: 'center'
-  },
-  buttonContainer: {
-    height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30,
-  },
-  loginButton: {
-    backgroundColor: "#00b5ec",
-  },
-  loginText: {
-    color: 'white',
-  },
-  dropdownContainer: {
-    borderBottomColor: '#F5FCFF',
-    // backgroundColor: '#FFFFFF',
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: 'row',
-
-  }
-});
