@@ -27,6 +27,10 @@ export default class App extends Component {
 
   
   componentDidMount(){
+    this.checkLoggedUser();
+  }
+
+  checkLoggedUser = () =>{
     this.authService.isLogged()
     .then(res => {
       this.setState({
@@ -67,7 +71,7 @@ export default class App extends Component {
         {
           this.state.loaded ?
             this.state.isLoggedIn ?
-            <Nav changeMenu={()=>this.changeToGuestMenu()}/> :
+            <Nav changeMenu={()=>this.changeToGuestMenu()} checkLoggedUser={()=>this.checkLoggedUser()}/> :
             <NavGuest changeMenu={(user)=>this.changeToLoggedMenu(user)}/>
             :
             <Loader/>

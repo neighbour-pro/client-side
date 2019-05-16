@@ -19,24 +19,24 @@ export default class ProfileRoute extends Component {
         this.state = {
             view: '',
         }
-        
+
     }
 
-    componentDidMount(){
-        if(this.props.isLoggedIn){
-            switch(this.props.isLoggedIn.role){
+    componentDidMount() {
+        if (this.props.isLoggedIn) {
+            switch (this.props.isLoggedIn.role) {
                 case 'Client':
-                this.setState({
-                    ...this.state,
-                    view: 'clientprofile'
-                });
-                break;
+                    this.setState({
+                        ...this.state,
+                        view: 'clientprofile'
+                    });
+                    break;
                 case 'Professional':
-                this.setState({
-                    ...this.state,
-                    view: 'professionalprofile'
-                });
-                break;
+                    this.setState({
+                        ...this.state,
+                        view: 'professionalprofile'
+                    });
+                    break;
             }
         }
     }
@@ -50,26 +50,26 @@ export default class ProfileRoute extends Component {
         if (this.props.isLoggedIn) {
             switch (this.state.view) {
                 case 'reviews':
-                    return <Rating redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <Rating redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
                 case 'clientedit':
-                    return <ClientEdit  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <ClientEdit redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
                 case 'clientprofile':
-                    return <ClientProfile  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <ClientProfile redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
                 case 'professionaledit':
-                    return <ProfessionalEdit  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <ProfessionalEdit redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
                 case 'professionalprofile':
-                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <ProfessionalProfile redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
                 default:
-                    return <ProfessionalProfile  redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn}/>
+                    return <ProfessionalProfile redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
             }
         } else {
             switch (this.state.view) {
                 case 'signup':
-                    return <Signup redirect={(where) => this.redirectTo(where)} changeMenu={(user)=>this.props.changeMenu(user)} />
+                    return <Signup redirect={(where) => this.redirectTo(where)} changeMenu={(user) => this.props.changeMenu(user)} />
                 case 'login':
-                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user)=>this.props.changeMenu(user)} />
+                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user) => this.props.changeMenu(user)} />
                 default:
-                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user)=>this.props.changeMenu(user)} />
+                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user) => this.props.changeMenu(user)} />
             }
         }
     }

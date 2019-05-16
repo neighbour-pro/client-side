@@ -27,6 +27,10 @@ export default class Nav extends React.Component {
   }
 
   componentDidMount() {
+    this.checkLoggedUser();
+  }
+
+  checkLoggedUser = () => {
     this.authService.isLogged()
       .then(res => {
         this.setState({
@@ -52,7 +56,7 @@ export default class Nav extends React.Component {
   })
 
   
-  ProfileRoutes = () => <ProfileRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)} />
+  ProfileRoutes = () => <ProfileRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)} checkLoggedUser={()=>this.checkLoggedUser()}/>
   MessageRoutes = () => <MessageRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)} />
   SearchRoutes = () => <SearchRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)}/>
   HelpRoutes = () => <HelpRoute nextProps={this.state.nextProps} isLoggedIn={this.state.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)} changeTabIndex={(n, props)=>this.changeTabIndex(n, props)}/>;

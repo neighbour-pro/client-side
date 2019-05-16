@@ -41,7 +41,7 @@ export default class ProfessionalFinal extends Component {
                                 <View style={styles.profileHeader}>
                                     <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
                                     <Text style={styles.name}>{this.state.professional.name}</Text>
-                                    <Text style={styles.info}>Niñera</Text>
+                                    {/* <Text style={styles.info}>Niñera</Text> */}
                                     <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
                                 </View>
                                 <View style={styles.hrLine} />

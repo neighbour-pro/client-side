@@ -31,6 +31,7 @@ export default class ClientEdit extends Component {
     saveAndRedirect = () => {
         this.userService.updateClient(this.props.isLoggedIn._id, this.state)
             .then(res => {
+                this.props.checkLoggedUser()
                 this.props.redirectTo('clientprofile');
             })
             .catch(err => {
