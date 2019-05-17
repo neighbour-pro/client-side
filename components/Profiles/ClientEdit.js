@@ -49,9 +49,9 @@ export default class ClientEdit extends Component {
 
                 <View style={styles.profileHeader}>
                     {/* <Image style={styles.imgProfile} source={{ uri: 'https://img.archilovers.com/projects/c_383_63fe7970-a3e6-45e2-ba7d-7bfe6563e6f4.jpg' }} /> */}
-                    <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
+                    {/* <Text style={styles.locationInfo}>Legazpi, Madrid</Text> */}
                 </View>
-                <View style={styles.hrLine} />
+                {/* <View style={styles.hrLine} /> */}
                 <TextInput
                     placeholder='your name'
                     label='name'
@@ -98,67 +98,5 @@ export default class ClientEdit extends Component {
 
 const styles = StyleSheet.create({
 
-    profileHeader: {
-        paddingTop: 80,
 
-    },
-    imgProfile: {
-        width: 170,
-        height: 170,
-        borderRadius: 85,
-        borderWidth: 4,
-        borderColor: "#333",
-        marginBottom: 10,
-        alignSelf: 'center',
-        position: 'absolute',
-        marginTop: 80
-    },
-
-    name: {
-        marginTop: 280,
-        fontSize: 20,
-        color: "#333333",
-        fontWeight: "900",
-        textAlign: 'center'
-    },
-    info: {
-        fontSize: 16,
-        color: "#00BFFF",
-        marginTop: 10,
-        textAlign: 'center',
-    },
-    locationInfo: {
-        fontSize: 16,
-        color: "#959595",
-        marginTop: 10,
-        textAlign: 'center',
-    },
-    hrLine: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
-        marginLeft: 15,
-        marginRight: 15,
-        marginTop: 15,
-        marginBottom: 15,
-    },
-    description: {
-        marginTop: 10,
-        fontSize: 16,
-        color: "#696969",
-        marginLeft: 15,
-        marginRight: 15,
-        textAlign: 'center',
-        // fontStyle: 'italic',
-    },
-    proFeature: {
-        backgroundColor: '#eeeeee',
-        alignSelf: 'stretch',
-        textAlign: 'center',
-        fontSize: 16,
-        color: "#333333",
-        marginTop: 20,
-        marginLeft: 15,
-        marginRight: 15,
-        padding: 5,
-    },
 });

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import MapView, {Polyline} from 'react-native-maps';
+import TopBar from '../TopBar/TopBar';
 
 
 
@@ -11,8 +12,8 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-class App extends Component<Props> {
+// type Props = {};
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -75,7 +76,11 @@ class App extends Component<Props> {
 
   render() {
     return (
-      <MapView style={styles.map} initialRegion={{
+
+      <React.Fragment>
+        <TopBar title="Map view" noBack noOffer showList redirectTo={(where)=>this.props.redirectTo(where)}/>
+        <React.Fragment>
+        <MapView style={styles.map} initialRegion={{
         latitude: 40.3925321,
         longitude: -3.6982669,
         latitudeDelta: 1,
@@ -114,6 +119,8 @@ class App extends Component<Props> {
           }} title={"Your destination"} />
         } */}
       </MapView>
+        </React.Fragment>
+      </React.Fragment>
 
       
       // <View style={styles.container}>
@@ -127,7 +134,8 @@ class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    flex: 1,
+    // position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
@@ -136,7 +144,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   map: {
-    position: 'absolute',
+    flex: 1,
+    // position: 'absolute',
     top: 0,
     left: 0,
     right: 0,

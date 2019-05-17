@@ -53,6 +53,7 @@ export default class ProListView extends Component {
   }
 
   searchPro(query){
+    console.log(query)
     this.setState({
       ...this.state,
       query
@@ -76,10 +77,10 @@ export default class ProListView extends Component {
         {
           this.state.loaded ?
             <View style={styles.container}>
-            <TopBar noOffer noBack/>
+            <TopBar noOffer noBack showMap redirectTo={(where)=>this.props.redirectTo(where)} title='Search' subtitle='Find professionals around you'/>
               <Searchbar
                 style={styles.searchTop}
-                placeholder="Search professionals nearby..."
+                placeholder="Search nearby..."
                 onChangeText={query => this.searchPro(query)}
                 value={this.state.query}
               />
@@ -98,7 +99,7 @@ export default class ProListView extends Component {
                         
                         {
                           !isNaN(parseFloat(item.avg_rate)) ? 
-                          <Text style={styles.rating}>Rating: {parseFloat(item.avg_rate).toFixed(2)}</Text> :
+                          <Text style={styles.rating}>Rating: {parseFloat(item.avg_rate).toFixed(2)} / 5</Text> :
                           <Text style={styles.rating}>No reviews</Text>
                         }
                         <TouchableHighlight style={styles.btnCard} onPress={() => {

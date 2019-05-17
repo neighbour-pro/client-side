@@ -33,11 +33,11 @@ export default class ChatList extends Component {
     const { firstQuery } = this.state;
     return (
       <View style={styles.container}>
-      <TopBar noOffer noBack/>
+      <TopBar noOffer noBack title='Your chat list'/>
 
         <Searchbar
           style={styles.searchTop}
-          placeholder="Search professionals nearby..."
+          placeholder="Find conversation..."
           onChangeText={query => { this.setState({ firstQuery: query }); }}
           value={firstQuery}
         />

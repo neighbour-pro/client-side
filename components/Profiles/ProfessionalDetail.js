@@ -34,7 +34,7 @@ export default class ProfessionalDetail extends Component {
     render() {
         return (
             <React.Fragment>
-                <TopBar noOffer redirectTo={(where, next) => this.props.redirectTo(where, next)} route=''/>
+                <TopBar noOffer title='Back' redirectTo={(where, next) => this.props.redirectTo(where, next)} route=''/>
                 {
                     this.state.loaded ?
                     <ScrollView contentContainerStyle={{flexGrow:1, justifyContent: 'space-between',}}>

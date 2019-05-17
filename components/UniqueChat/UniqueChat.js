@@ -7,6 +7,7 @@ import config from '../../config/config';
 import TopBar from '../TopBar/TopBar'
 
 
+const sendIcon = require ('../../src/images/filled-sent.png');
 
 export default class Chat extends Component {
 
@@ -90,6 +91,8 @@ export default class Chat extends Component {
       .catch(err => console.log(err));
   }
 
+
+
   render() {
 
     return (
@@ -111,8 +114,7 @@ export default class Chat extends Component {
                   }}
                   renderItem={(message) => {
                     const item = message.item;
-                    console.log(item)
-                    let inMessage = item.user_id !== this.props.isLoggedIn._id;
+                    let inMessage = item.user_id._id !== this.props.isLoggedIn._id;
                     let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
                     return (
                       <View style={[styles.item, itemStyle]}>
@@ -133,7 +135,7 @@ export default class Chat extends Component {
                   </View>
 
                   <TouchableOpacity style={styles.btnSend} onPress={() => this.sendMessage()}>
-                    <Image source={{ uri: "https://png.icons8.com/small/75/ffffff/filled-sent.png" }} style={styles.iconSend} />
+                    <Image source={sendIcon} style={styles.iconSend} />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -161,7 +163,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   btnSend: {
-    backgroundColor: "#00BFFF",
+    color: '#6200ee',
     width: 40,
     height: 40,
     borderRadius: 360,

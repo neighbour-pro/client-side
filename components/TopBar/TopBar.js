@@ -24,14 +24,25 @@ constructor(props){
         null
         }
         <Appbar.Content
-          title="Title"
-          subtitle="Subtitle"
+          title={this.props.title}
+          subtitle={this.props.subtitle}
         />
         {
           !this.props.noOffer ?
           <Appbar.Action icon="add" onPress={this._onSearch} /> :
           null
         }
+        {
+          this.props.showMap ?
+          <Appbar.Action icon="map" onPress={()=>this.props.redirectTo('map')} /> :
+          null
+        }
+        {
+          this.props.showList ?
+          <Appbar.Action icon="list" onPress={()=>this.props.redirectTo('')} /> :
+          null
+        }
+
         {/* <Appbar.Action icon="more-vert" onPress={this._onMore} /> */}
       </Appbar.Header>
     );

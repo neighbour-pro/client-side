@@ -17,6 +17,7 @@ export default class UserService{
     }
 
     getProfessionalNearMe(lng, lat, query){
+        console.log(config.SERVER_URL+'/api/user'+`/nearme/${lng}/${lat}/20000/${query}`)
         return query !== '' ?
         this.service.get(`/nearme/${lng}/${lat}/20000/${query}`) :
         this.service.get(`/nearme/${lng}/${lat}/20000`)

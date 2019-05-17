@@ -14,7 +14,7 @@ import Nav from './components/Nav/Nav';
 import NavGuest from './components/Nav/NavGuest';
 import Loader from './components/Loader/Loader';
 import ReviewPage from './components/Test/ReviewTest'
-
+console.disableYellowBox = true
 export default class App extends Component {
 
   constructor() {
@@ -41,7 +41,6 @@ export default class App extends Component {
       })
     })
     .catch(err => {
-      console.log(err)
       this.setState({
         ...this.state,
         loaded: true,
