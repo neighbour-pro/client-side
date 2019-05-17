@@ -14,7 +14,7 @@ export default class Nav extends React.Component {
     this.state = {
       index: 1,
       routes: [
-        { key: 'help', title: 'Help', icon: 'help', color: '#5432ed' },
+        { key: 'help', title: 'Logout', icon: 'power', color: '#5432ed' },
         { key: 'searchMap', title: 'Search', icon: 'search', color: '#5432ed' },
         { key: 'inbox', title: 'Messages', icon: 'chat', color: '#5432ed' },
         { key: 'profile', title: 'Profile', icon: 'person', color: '#5432ed' },
