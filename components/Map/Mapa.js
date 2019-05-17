@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Image } from 'react-native';
 import MapView, { Polyline } from 'react-native-maps';
 import TopBar from '../TopBar/TopBar';
 import UserService from '../../services/UserService';
@@ -107,8 +107,8 @@ class App extends Component {
             initialRegion={{
               latitude: 40.3925321,
               longitude: -3.6982669,
-              latitudeDelta: 1,
-              longitudeDelta: 1,
+              latitudeDelta: 0.3,
+              longitudeDelta: 0.3,
             }}
             annotations={this.state.professionals}>
             {!!this.state.latitude && !!this.state.longitude && this.state.x === 'true' &&
@@ -136,7 +136,16 @@ class App extends Component {
                   "latitude": this.state.latitude, "longitude": this.state.longitude
                 }} 
                 title={"Your location"}
-                image={myLocation} />
+                // image={myLocation} 
+                >
+                  <Image
+                    source={myLocation}
+                    style={{
+                      width:30,
+                      height: 40,
+                    }}
+                  />
+                </MapView.Marker>
             }
 
             {
