@@ -110,8 +110,8 @@ export default class Chat extends Component {
                     return item._id;
                   }}
                   renderItem={(message) => {
-                    console.log(item);
                     const item = message.item;
+                    console.log(item)
                     let inMessage = item.user_id !== this.props.isLoggedIn._id;
                     let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
                     return (

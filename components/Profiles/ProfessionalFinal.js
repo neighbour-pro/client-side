@@ -78,6 +78,7 @@ export default class ProfessionalFinal extends Component {
 }
 
 const styles = StyleSheet.create({
+    
 
     imgProfile: {
         width: 170,

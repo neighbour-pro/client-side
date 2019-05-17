@@ -56,11 +56,11 @@ export default class ProfileRoute extends Component {
                 case 'clientedit':
                     return <ClientEdit nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
                 case 'clientprofile':
-                    return <ClientProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
+                    return <ClientProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)}/>
                 case 'professionaledit':
                     return <ProfessionalEdit nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
                 case 'professionalprofile':
-                    return <ProfessionalProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
+                    return <ProfessionalProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} changeMenu={(user)=>this.props.changeMenu(user)}/>
                 default:
                     return <ProfessionalProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
             }

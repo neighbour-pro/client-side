@@ -13,6 +13,7 @@ import AuthService from './services/AuthService';
 import Nav from './components/Nav/Nav';
 import NavGuest from './components/Nav/NavGuest';
 import Loader from './components/Loader/Loader';
+import ReviewPage from './components/Test/ReviewTest'
 
 export default class App extends Component {
 

@@ -75,7 +75,7 @@ export default class Rating extends Component {
                                                  </Text>
                                             </Text>
                                             <Text style={styles.dateStyle}>
-                                                {review.createdAt}
+                                                {`${new Date(review.createdAt).getDate()}/${new Date(review.createdAt).getMonth()}/${new Date(review.createdAt).getFullYear()}`}
                                             </Text>
                                         </View>
         
