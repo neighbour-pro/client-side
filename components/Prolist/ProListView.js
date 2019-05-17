@@ -76,7 +76,12 @@ export default class ProListView extends Component {
 
                       <View style={styles.cardProContent}>
                         <Text style={styles.name}>{item.name}</Text>
-                        <Text style={styles.rating}>Rating: {parseFloat(item.avg_rate).toFixed(2)}</Text>
+                        
+                        {
+                          !isNaN(parseFloat(item.avg_rate)) ? 
+                          <Text style={styles.rating}>Rating: {parseFloat(item.avg_rate).toFixed(2)}</Text> :
+                          <Text style={styles.rating}>No reviews</Text>
+                        }
                         <TouchableHighlight style={styles.btnCard} onPress={() => {
                           this.props.isLoggedIn ?
                             this.props.redirectTo('professional', item.professional_id) :
