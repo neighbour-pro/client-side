@@ -33,38 +33,44 @@ export default class ProfessionalFinal extends Component {
     render() {
         return (
 
-                <React.Fragment>
-                    <TopBar noOffer noBack/>
+            <React.Fragment>
+                <TopBar noOffer noBack />
                 {
                     this.state.loaded ?
-                            <ScrollView contentContainerStyle={{flexGrow:1, justifyContent: 'space-between',}}>
-                                <View style={styles.profileHeader}>
-                                    <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
-                                    <Text style={styles.name}>{this.state.professional.name}</Text>
-                                    {/* <Text style={styles.info}>Niñera</Text> */}
-                                    <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
-                                </View>
-                                <View style={styles.hrLine} />
+                        <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', }}>
+                            <View style={styles.profileHeader}>
+                                <Image style={styles.imgProfile} source={{ uri: this.state.professional.userPhoto }} />
+                                <Text style={styles.name}>{this.state.professional.name}</Text>
+                                {/* <Text style={styles.info}>Niñera</Text> */}
+                                <Text style={styles.locationInfo}>Legazpi, Madrid</Text>
+                            </View>
+                            <View style={styles.hrLine} />
 
-                                <Text style={styles.description}>{this.state.professional.description}</Text>
-                                <Text style={styles.proFeature}>SERVICES</Text>
-                                <Text style={styles.description}>{this.state.professional.services}</Text>
-                                <Text style={styles.proFeature}>REVIEWS</Text>
-                                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews')}>
-                                    <Text style={styles.description}>Show reviews</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('professionaledit')}>
-                                    <Text>Edit</Text>
-                                </TouchableHighlight>
+                            <Text style={styles.description}>{this.state.professional.description}</Text>
+                            <Text style={styles.proFeature}>SERVICES</Text>
+                            <Text style={styles.description}>{this.state.professional.services}</Text>
+                            {
+                                this.state.professional.reviews.length !== 0 ?
+                                    <React.Fragment>
+                                        <Text style={styles.proFeature}>REVIEWS</Text>
+                                        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('reviews')}>
+                                            <Text style={styles.description}>Show reviews</Text>
+                                        </TouchableHighlight>
+                                    </React.Fragment> :
+                                    null
+                            }
+                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('professionaledit', this.state.professional)}>
+                                <Text>Edit</Text>
+                            </TouchableHighlight>
 
-                                <View style={{ width: '50%' }}>
-                                </View>
-                            </ScrollView>
+                            <View style={{ width: '50%' }}>
+                            </View>
+                        </ScrollView>
                         :
 
                         <Loader />
                 }
-</React.Fragment>
+            </React.Fragment>
             //</View>
 
         );

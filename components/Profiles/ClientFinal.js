@@ -46,7 +46,7 @@ export default class ClientFinal extends Component {
                             <View style={styles.hrLine} />
 
                             <Text style={styles.description}>{this.state.client.description}</Text>
-                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('clientedit')}>
+                            <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.redirectTo('clientedit', this.state.client)}>
                                 <Text>Edit</Text>
                             </TouchableHighlight>
 

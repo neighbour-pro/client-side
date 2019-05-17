@@ -18,6 +18,7 @@ export default class ProfileRoute extends Component {
         super(props);
         this.state = {
             view: '',
+            nextProps: null
         }
 
     }
@@ -41,35 +42,36 @@ export default class ProfileRoute extends Component {
         }
     }
 
-    redirectTo = where => this.setState({
+    redirectTo = (where, next) => this.setState({
         ...this.state,
-        view: where
+        view: where,
+        nextProps: next
     });
 
     render() {
         if (this.props.isLoggedIn) {
             switch (this.state.view) {
                 case 'reviews':
-                    return <Rating redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
+                    return <Rating nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
                 case 'clientedit':
-                    return <ClientEdit redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
+                    return <ClientEdit nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
                 case 'clientprofile':
-                    return <ClientProfile redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
+                    return <ClientProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
                 case 'professionaledit':
-                    return <ProfessionalEdit redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
+                    return <ProfessionalEdit nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} checkLoggedUser={() => this.props.checkLoggedUser()} />
                 case 'professionalprofile':
-                    return <ProfessionalProfile redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
+                    return <ProfessionalProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
                 default:
-                    return <ProfessionalProfile redirectTo={(where) => this.redirectTo(where)} isLoggedIn={this.props.isLoggedIn} />
+                    return <ProfessionalProfile nextProps={this.state.nextProps} redirectTo={(where, next) => this.redirectTo(where, next)} isLoggedIn={this.props.isLoggedIn} />
             }
         } else {
             switch (this.state.view) {
                 case 'signup':
-                    return <Signup redirect={(where) => this.redirectTo(where)} changeMenu={(user) => this.props.changeMenu(user)} />
+                    return <Signup nextProps={this.state.nextProps} redirect={(where, next) => this.redirectTo(where, next)} changeMenu={(user) => this.props.changeMenu(user)} />
                 case 'login':
-                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user) => this.props.changeMenu(user)} />
+                    return <Login nextProps={this.state.nextProps} redirect={(where, next) => this.redirectTo(where, next)} changeMenu={(user) => this.props.changeMenu(user)} />
                 default:
-                    return <Login redirect={(where) => this.redirectTo(where)} changeMenu={(user) => this.props.changeMenu(user)} />
+                    return <Login nextProps={this.state.nextProps} redirect={(where, next) => this.redirectTo(where, next)} changeMenu={(user) => this.props.changeMenu(user)} />
             }
         }
     }

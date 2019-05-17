@@ -21,10 +21,10 @@ export default class ClientEdit extends Component {
 
     componentDidMount(){
         this.setState({
-            name: this.props.isLoggedIn.name,
-            email: this.props.isLoggedIn.email,
-            phone: this.props.isLoggedIn.phone,
-            description: this.props.isLoggedIn.description
+            name: this.props.nextProps.name,
+            email: this.props.nextProps.email,
+            phone: this.props.nextProps.phone,
+            description: this.props.nextProps.description
         });
     }
 

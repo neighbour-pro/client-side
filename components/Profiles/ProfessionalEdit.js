@@ -23,16 +23,16 @@ export default class ProfessionalEdit extends Component {
 
     componentDidMount() {
         this.setState({
-            name: this.props.isLoggedIn.name,
-            email: this.props.isLoggedIn.email,
-            phone: this.props.isLoggedIn.phone,
-            description: this.props.isLoggedIn.description,
-            services: this.props.isLoggedIn.services,
+            name: this.props.nextProps.name,
+            email: this.props.nextProps.email,
+            phone: this.props.nextProps.phone,
+            description: this.props.nextProps.description,
+            services: this.props.nextProps.services,
         })
     }
 
     updateUser = () => {
-        this.userService.updateClient(this.props.isLoggedIn._id, this.state)
+        this.userService.updateClient(this.props.nextProps._id, this.state)
             .then(res => {
                 this.props.checkLoggedUser()
                 this.props.redirectTo('professionalprofile')
