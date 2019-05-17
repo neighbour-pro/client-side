@@ -46,7 +46,9 @@ class App extends Component {
         this.userService.getProfessionalNearMe(this.state.longitude, this.state.latitude, this.state.query)
           .then(professionals => {
             const pros = professionals.data.users.map(pro => {
+              console.log(pro)
               return {
+                _id: pro.professional_id,
                 latitude: pro.location.lat,
                 longitude: pro.location.lng,
                 title: pro.name,
@@ -156,7 +158,12 @@ class App extends Component {
                   "latitude": pro.latitude,
                   "longitude": pro.longitude
                 }} 
-                title={pro.title} />
+                title={pro.title} 
+                onCalloutPress={() => {
+                  this.props.isLoggedIn ?
+                    this.props.redirectTo('professional', pro._id) :
+                    alert('Sign up to view the professional profile')
+                }}/>
               })
             }
 
