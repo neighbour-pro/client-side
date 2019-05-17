@@ -13,6 +13,7 @@ export default class ProListView extends Component {
     super(props);
     this.state = {
       professionalList: false,
+      query: '',
       loaded: false
     };
     this.userService = new UserService();
@@ -29,7 +30,7 @@ export default class ProListView extends Component {
         error: null
       }, () => {
 
-        this.userService.getProfessionalNearMe(this.state.longitude, this.state.latitude)
+        this.userService.getProfessionalNearMe(this.state.longitude, this.state.latitude, this.state.query)
           .then(response => {
             this.setState({
               ...this.state,
@@ -51,6 +52,24 @@ export default class ProListView extends Component {
     })
   }
 
+  searchPro(query){
+    this.setState({
+      ...this.state,
+      query
+    }, () => {
+      this.userService.getProfessionalNearMe(this.state.longitude, this.state.latitude, this.state.query)
+          .then(response => {
+            this.setState({
+              ...this.state,
+              professionalList: response.data.users,
+              loaded: true
+            })
+          })
+          .catch(err => console.log(err));
+    })
+    
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -61,7 +80,7 @@ export default class ProListView extends Component {
               <Searchbar
                 style={styles.searchTop}
                 placeholder="Search professionals nearby..."
-                onChangeText={query => { this.setState({ ...this.state, query: query }); }}
+                onChangeText={query => this.searchPro(query)}
                 value={this.state.query}
               />
 

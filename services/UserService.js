@@ -16,8 +16,10 @@ export default class UserService{
         return this.service.get('/'+id)
     }
 
-    getProfessionalNearMe(lng, lat){
-        return this.service.get(`/nearme/${lng}/${lat}/20000`)
+    getProfessionalNearMe(lng, lat, query){
+        return query !== '' ?
+        this.service.get(`/nearme/${lng}/${lat}/20000/${query}`) :
+        this.service.get(`/nearme/${lng}/${lat}/20000`)
     }
 
     getReviewsFromProfessional(professionalId){
