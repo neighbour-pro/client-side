@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import LoggedNavigator from './src/router/LoggedNavigator';
 import GuestNavigator from './src/router/GuestNavigator';
 
-const isLogged = false;
+const isLogged = true;
 
 const TabNavigator = isLogged ? LoggedNavigator : GuestNavigator;
 

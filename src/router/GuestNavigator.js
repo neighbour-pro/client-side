@@ -1,27 +1,51 @@
-import React, {Component} from 'react';
-import {createBottomTabNavigator} from 'react-navigation';
-import SearchScreen from '../screens/Search/SearchScreen';
-import AuthScreen from '../screens/Auth/AuthScreen';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React, { Component } from "react";
+import { Platform } from "react-native";
+import { createBottomTabNavigator } from "react-navigation";
+import SearchScreen from "../screens/Search/SearchScreen";
+import AuthScreen from "../screens/Auth/AuthScreen";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import {
+  NAV_TAB_ACTIVE_COLOR,
+  NAV_TAB_INACTIVE_COLOR,
+  NAV_TAB_ICON_SIZE
+} from "../config/navigation";
 
-export default createBottomTabNavigator({
-  Search: {
-    screen: SearchScreen,
-    navigationOptions: {
-      tabBarLabel: 'Search',
-      tabBarIcon: ({tintColor}) => <Ionicons name='ios-search' size={24} color={tintColor}/>
+const searchIcon = Platform.OS === "ios" ? "ios-search" : "ios-search";
+const authIcon = Platform.OS === "ios" ? "ios-person" : "ios-person";
+
+export default createBottomTabNavigator(
+  {
+    Search: {
+      screen: SearchScreen,
+      navigationOptions: {
+        tabBarLabel: "Search",
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons
+            name={searchIcon}
+            size={NAV_TAB_ICON_SIZE}
+            color={tintColor}
+          />
+        )
+      }
+    },
+    Auth: {
+      screen: AuthScreen,
+      navigationOptions: {
+        tabBarLabel: "Auth",
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons
+            name={authIcon}
+            size={NAV_TAB_ICON_SIZE}
+            color={tintColor}
+          />
+        )
+      }
     }
   },
-  Auth: {
-    screen: AuthScreen,
-    navigationOptions: {
-      tabBarLabel: 'Auth',
-      tabBarIcon: ({tintColor}) => <Ionicons name='ios-person' size={24} color={tintColor}/>
+  {
+    tabBarOptions: {
+      activeTintColor: NAV_TAB_ACTIVE_COLOR,
+      inactiveTintColor: NAV_TAB_INACTIVE_COLOR
     }
   }
-},{
-  tabBarOptions: {
-    activeTintColor: 'purple',
-    inactiveTintColor: '#333',
-  }
-});
+);
