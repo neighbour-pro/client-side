@@ -15,7 +15,7 @@ const authIcon = Platform.OS === "ios" ? "ios-person" : "ios-person";
 
 export default createBottomTabNavigator(
   {
-    Search: {
+    SearchTab: {
       screen: SearchScreen,
       navigationOptions: {
         tabBarLabel: "Search",
@@ -28,7 +28,7 @@ export default createBottomTabNavigator(
         )
       }
     },
-    Auth: {
+    AuthTab: {
       screen: AuthScreen,
       navigationOptions: {
         tabBarLabel: "Auth",

@@ -18,7 +18,7 @@ const profileIcon = Platform.OS === "ios" ? "ios-person" : "ios-person";
 
 export default createBottomTabNavigator(
   {
-    Search: {
+    SearchTab: {
       screen: SearchScreen,
       navigationOptions: {
         tabBarLabel: "Search",
@@ -31,7 +31,7 @@ export default createBottomTabNavigator(
         )
       }
     },
-    Message: {
+    MessageTab: {
       screen: MessageScreen,
       navigationOptions: {
         tabBarLabel: "Messages",
@@ -44,7 +44,7 @@ export default createBottomTabNavigator(
         )
       }
     },
-    Profile: {
+    ProfileTab: {
       screen: ProfileScreen,
       navigationOptions: {
         tabBarLabel: "Profile",
