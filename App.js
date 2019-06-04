@@ -6,25 +6,21 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import { StyleSheet, StatusBar, Text, View } from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 export default class App extends Component {
-
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Neighbour Pro App</Text>
-      </View>
+      <SafeAreaView>
+        <View>
+          <Text>Neighbour Pro App</Text>
+          <Ionicon name='ios-arrow-up' size={48} color='#333'/>
+        </View>
+      </SafeAreaView>
     );
-
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginVertical: StatusBar.currentHeight,
-    backgroundColor: 'red',
-  }
-})
+const styles = StyleSheet.create({});
