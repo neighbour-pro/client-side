@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button, SafeAreaView } from 'react-native';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -10,9 +10,10 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <View>
+      <SafeAreaView>
         <Text> Signup Component </Text>
-      </View>
+        <Button title='Switch to Login' onPress={()=>this.props.navigation.navigate('Login')}/>
+      </SafeAreaView>
     );
   }
 }

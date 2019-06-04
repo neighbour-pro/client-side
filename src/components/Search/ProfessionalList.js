@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class ProfessionalList extends Component {
@@ -14,6 +14,7 @@ export default class ProfessionalList extends Component {
       <View>
         <Text>ProfessionalList Component</Text>
         <Ionicons name='ios-search' size={48} color='red'/>
+        <Button title="Go to map" onPress={()=>this.props.navigation.navigate('ProfessionalMap')}/>
       </View>
     );
   }

@@ -6,9 +6,15 @@ import Signup from '../../components/Auth/Signup';
 
 export default createStackNavigator({
   Login: {
-    screen: Login
+    screen: Login,
+    navigationOptions: {
+      header: null
+    }
   },
   Signup: {
-    screen: Signup
+    screen: Signup,
+    navigationOptions: {
+      header: null
+    }
   }
 });
