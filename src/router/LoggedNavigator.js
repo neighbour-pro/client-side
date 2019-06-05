@@ -4,8 +4,8 @@ import { createBottomTabNavigator } from "react-navigation";
 import SearchScreen from "../screens/Search/SearchScreen";
 import MessageScreen from '../screens/Messages/MessagesScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
+import DrawerScreen from '../screens/Drawer/DrawerScreen';
 import Ionicons from "react-native-vector-icons/Ionicons";
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {
   NAV_TAB_ACTIVE_COLOR,
   NAV_TAB_INACTIVE_COLOR,
@@ -15,6 +15,7 @@ import {
 const searchIcon = Platform.OS === "ios" ? "ios-search" : "ios-search";
 const messageIcon = Platform.OS === "ios" ? "ios-mail" : "ios-mail";
 const profileIcon = Platform.OS === "ios" ? "ios-person" : "ios-person";
+const menuIcon = Platform.OS === "ios" ? "ios-menu" : "ios-menu";
 
 export default createBottomTabNavigator(
   {
@@ -55,6 +56,23 @@ export default createBottomTabNavigator(
             color={tintColor}
           />
         )
+      }
+    },
+    DrawerTab: {
+      screen: DrawerScreen,
+      navigationOptions: {
+        tabBarLabel: "Menu",
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons
+            name={menuIcon}
+            size={NAV_TAB_ICON_SIZE}
+            color={tintColor}
+          />
+        ),
+        tabBarOnPress: ({navigation, defaultHandler}) => {
+          navigation.openDrawer();
+          return; // Debería evitar el cambio a la tab
+        }
       }
     }
   },
