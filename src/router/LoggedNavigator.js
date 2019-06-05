@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { Platform } from "react-native";
+import { Platform, Dimensions } from "react-native";
 import { createBottomTabNavigator, createDrawerNavigator } from "react-navigation";
 import SearchScreen from "../screens/Search/SearchScreen";
 import MessageScreen from '../screens/Messages/MessagesScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
-import DrawerScreen from '../screens/Drawer/DrawerScreen';
 import Drawer from '../components/Drawer/Drawer';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {
   NAV_TAB_ACTIVE_COLOR,
   NAV_TAB_INACTIVE_COLOR,
-  NAV_TAB_ICON_SIZE
+  NAV_TAB_ICON_SIZE,
+  DRAWER_DIMENSIONS,
+  DRAWER_OVERLAY_COLOR
 } from "../config/navigation";
 
 const searchIcon = Platform.OS === "ios" ? "ios-search" : "ios-search";
@@ -86,8 +87,13 @@ export default createDrawerNavigator(
   {
     Tabs,
   },
-  { 
+  {
+    drawerWidth: Dimensions.get('window').width*DRAWER_DIMENSIONS,
     drawerPosition: 'right',
     contentComponent: props => <Drawer {...props} />,
+    drawerBackgroundColor: 'transparent',
+    hideStatusBar: false,
+    overlayColor: DRAWER_OVERLAY_COLOR,
+    drawerType: 'front'
   }
 )
