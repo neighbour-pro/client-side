@@ -68,7 +68,7 @@ export default class Login extends Component {
           <Text style={styles.bottomText}>Forgot your password?</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight onPress={() => alert('Go to signup')}>
+        <TouchableHighlight onPress={() => this.props.navigation.navigate('Signup')}>
           <Text style={styles.bottomText}>Create Account</Text>
         </TouchableHighlight>
       </SafeAreaView>
