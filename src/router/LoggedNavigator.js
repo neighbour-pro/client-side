@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Platform } from "react-native";
-import { createBottomTabNavigator } from "react-navigation";
+import { createBottomTabNavigator, createDrawerNavigator } from "react-navigation";
 import SearchScreen from "../screens/Search/SearchScreen";
 import MessageScreen from '../screens/Messages/MessagesScreen';
 import ProfileScreen from '../screens/Profile/ProfileScreen';
 import DrawerScreen from '../screens/Drawer/DrawerScreen';
+import Drawer from '../components/Drawer/Drawer';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import {
   NAV_TAB_ACTIVE_COLOR,
@@ -17,7 +18,7 @@ const messageIcon = Platform.OS === "ios" ? "ios-mail" : "ios-mail";
 const profileIcon = Platform.OS === "ios" ? "ios-person" : "ios-person";
 const menuIcon = Platform.OS === "ios" ? "ios-menu" : "ios-menu";
 
-export default createBottomTabNavigator(
+const Tabs = createBottomTabNavigator(
   {
     SearchTab: {
       screen: SearchScreen,
@@ -59,8 +60,8 @@ export default createBottomTabNavigator(
       }
     },
     DrawerTab: {
-      screen: DrawerScreen,
-      navigationOptions: {
+      screen: ProfileScreen,
+      navigationOptions: ({navigation}) => ({
         tabBarLabel: "Menu",
         tabBarIcon: ({ tintColor }) => (
           <Ionicons
@@ -69,11 +70,8 @@ export default createBottomTabNavigator(
             color={tintColor}
           />
         ),
-        tabBarOnPress: ({navigation, defaultHandler}) => {
-          navigation.openDrawer();
-          return; // Debería evitar el cambio a la tab
-        }
-      }
+        tabBarOnPress: () => navigation.openDrawer()
+      })
     }
   },
   {
@@ -83,3 +81,13 @@ export default createBottomTabNavigator(
     }
   }
 );
+
+export default createDrawerNavigator(
+  {
+    Tabs,
+  },
+  { 
+    drawerPosition: 'right',
+    contentComponent: props => <Drawer {...props} />,
+  }
+)

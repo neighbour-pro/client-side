@@ -4,7 +4,7 @@ import {Dimensions} from 'react-native';
 
 export default createDrawerNavigator({
   Drawer: {
-    screen: Drawer
+    screen: () => null
   }
 },
 {
@@ -12,6 +12,6 @@ export default createDrawerNavigator({
   drawerPosition: 'right',
   contentComponent: Drawer,
   navigationOptions: {
-    drawerLockMode: 'locked-open'
+    drawerLockMode: 'unlocked',
   }
 })
