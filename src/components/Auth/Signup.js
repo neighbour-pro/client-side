@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, Button, SafeAreaView, StyleSheet } from "react-native";
+import { View, Text, Button, SafeAreaView, StyleSheet, Image, TextInput, TouchableHighlight, ScrollView } from "react-native";
+import { Container, Header, Content, Icon, Picker, Form } from "native-base";
+
+import logo from '../../../assets/images/logo.png';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -10,91 +13,93 @@ export default class Signup extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <View style={styles.logo}>
-          <Image style={styles.logoImg} source={logo} />
-        </View>
-        <Text style={styles.welcome}>Create a new account</Text>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputs}
-            placeholder="Full name"
-            keyboardType="default"
-            underlineColorAndroid="transparent"
-            // onChangeText={name => this.setState({ name })}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputs}
-            placeholder="Email"
-            keyboardType="email-address"
-            autoCapitalize="none"
-            underlineColorAndroid="transparent"
-            // onChangeText={email => this.setState({ email })}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputs}
-            placeholder="Password"
-            secureTextEntry={true}
-            underlineColorAndroid="transparent"
-            // onChangeText={password => this.setState({ password })}
-          />
-        </View>
-
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputs}
-            placeholder="Repeat password"
-            secureTextEntry={true}
-            underlineColorAndroid="transparent"
-            // onChangeText={pass_match => this.setState({ pass_match })}
-          />
-        </View>
-
-        <View style={styles.dropdownContainer}>
-          <Form>
-            <Picker
-              mode="dropdown"
-              placeholder="I am..."
-              iosIcon={
-                <Icon
-                  name="arrow-dropdown-circle"
-                  style={{ color: "#007aff", fontSize: 25 }}
-                />
-              }
-              style={{ width: undefined }} // ¿?
-              // selectedValue={this.state.selected}
-              // onValueChange={this.onValueChange.bind(this)}
-            >
-              <Picker.Item label="Professional" value="Professional" />
-              <Picker.Item label="Not professional" value="Client" />
-            </Picker>
-          </Form>
-        </View>
-
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => alert('Signup button')}
-        >
-          <Text style={styles.loginText}>Create account</Text>
-        </TouchableHighlight>
-        {true ? (
-          <View>
-            <Text style={styles.errMsg}>All fields are required</Text>
+        <ScrollView contentContainerStyle={styles.scroll}>
+          <View style={styles.logo}>
+            <Image style={styles.logoImg} source={logo} />
           </View>
-        ) : null}
+          <Text style={styles.welcome}>Create a new account</Text>
 
-        <TouchableHighlight
-          style={styles.buttonContainer}
-          onPress={() => alert("Go to login")}
-        >
-          <Text>Back to login</Text>
-        </TouchableHighlight>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputs}
+              placeholder="Full name"
+              keyboardType="default"
+              underlineColorAndroid="transparent"
+              // onChangeText={name => this.setState({ name })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputs}
+              placeholder="Email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              underlineColorAndroid="transparent"
+              // onChangeText={email => this.setState({ email })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputs}
+              placeholder="Password"
+              secureTextEntry={true}
+              underlineColorAndroid="transparent"
+              // onChangeText={password => this.setState({ password })}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputs}
+              placeholder="Repeat password"
+              secureTextEntry={true}
+              underlineColorAndroid="transparent"
+              // onChangeText={pass_match => this.setState({ pass_match })}
+            />
+          </View>
+
+          <View style={styles.dropdownContainer}>
+            <Form>
+              <Picker
+                mode="dropdown"
+                placeholder="I am..."
+                iosIcon={
+                  <Icon
+                    name="arrow-dropdown-circle"
+                    style={{ color: "#007aff", fontSize: 25 }}
+                  />
+                }
+                style={{ width: undefined }} // ¿?
+                // selectedValue={this.state.selected}
+                // onValueChange={this.onValueChange.bind(this)}
+              >
+                <Picker.Item label="Professional" value="Professional" />
+                <Picker.Item label="Not professional" value="Client" />
+              </Picker>
+            </Form>
+          </View>
+
+          <TouchableHighlight
+            style={[styles.buttonContainer, styles.loginButton]}
+            onPress={() => alert('Signup button')}
+          >
+            <Text style={styles.loginText}>Create account</Text>
+          </TouchableHighlight>
+          {true ? (
+            <View>
+              <Text style={styles.errMsg}>All fields are required</Text>
+            </View>
+          ) : null}
+
+          <TouchableHighlight
+            style={styles.buttonContainer}
+            onPress={() => this.props.navigation.navigate('Login')}
+          >
+            <Text>Back to login</Text>
+          </TouchableHighlight>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -105,7 +110,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#d0d8e9"
+    backgroundColor: "#d0d8e9",
+  },
+  scroll: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#d0d8e9",
+    marginBottom: 100,
+    paddingHorizontal: 50,
   },
   errMsg: {
     color: "#ff4a57"
@@ -171,7 +183,7 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: "#6200ee",
     marginBottom: 10,
-    marginTop: 80,
+    marginTop: 10,
     justifyContent: "center",
     alignItems: "center"
   },
