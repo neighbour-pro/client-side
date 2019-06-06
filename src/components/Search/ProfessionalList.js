@@ -8,20 +8,26 @@ import {
   ScrollView,
   TouchableHighlight
 } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { Searchbar } from 'react-native-paper';
 
 import logo from "../../../assets/images/logo.png";
+import { SafeAreaView } from "react-navigation";
 
 export default class ProfessionalList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {
+    query: ""
+  };
 
   render() {
     return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
         <ScrollView style={styles.contentList}>
+        <Searchbar
+          style={styles.searchTop}
+          placeholder="Search nearby..."
+          onChangeText={query => this.setState({ query })}
+          value={this.state.query}
+        />
           {listMock}
           {listMock}
           {listMock}
@@ -33,7 +39,7 @@ export default class ProfessionalList extends Component {
           {listMock}
           {listMock}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -41,7 +47,6 @@ export default class ProfessionalList extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
     backgroundColor: "#d0d8e9"
   },
   contentList: {
