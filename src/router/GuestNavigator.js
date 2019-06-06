@@ -43,7 +43,7 @@ export default createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: 'AuthTab',
+    // initialRouteName: 'AuthTab',
     tabBarOptions: {
       activeTintColor: NAV_TAB_ACTIVE_COLOR,
       inactiveTintColor: NAV_TAB_INACTIVE_COLOR,
