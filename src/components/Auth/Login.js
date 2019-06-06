@@ -7,21 +7,25 @@ import {
   StyleSheet,
   Dimensions,
   TextInput, TouchableHighlight,
-  Image
+  Image,
+  KeyboardAvoidingView
 } from "react-native";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
-const logo = require('../../../assets/images/logo.png');
+import logo from "../../../assets/images/logo.png";
 
 
 export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  state = {
+    email: '',
+    password: '',
+    error: false
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.scroll} behavior='padding'>
         <View style={styles.logo}>
           <Image style={styles.logoImg} source={logo} />
         </View>
@@ -34,7 +38,7 @@ export default class Login extends Component {
             keyboardType="email-address"
             autoCapitalize="none"
             underlineColorAndroid="transparent"
-            // onChangeText={email => this.setState({ email })}
+            onChangeText={email => this.setState({ email })}
           />
         </View>
 
@@ -44,7 +48,7 @@ export default class Login extends Component {
             placeholder="Password"
             secureTextEntry={true}
             underlineColorAndroid="transparent"
-            // onChangeText={password => this.setState({ password })}
+            onChangeText={password => this.setState({ password })}
           />
         </View>
 
@@ -55,7 +59,7 @@ export default class Login extends Component {
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
         <View>
-          {true ? (
+          {this.state.error ? (
             <View>
               <Text style={styles.errMsg}>Email or password are wrong</Text>
             </View>
@@ -71,6 +75,7 @@ export default class Login extends Component {
         <TouchableHighlight onPress={() => this.props.navigation.navigate('Signup')}>
           <Text style={styles.bottomText}>Create Account</Text>
         </TouchableHighlight>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     );
   }
@@ -82,6 +87,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#d0d8e9"
+  },
+  scroll: {
+    flex:1, 
+    alignItems:'center',
+    paddingHorizontal: 60,
   },
   welcome: {
     fontSize: 20,

@@ -1,19 +1,35 @@
 import React, { Component } from "react";
-import { View, Text, Button, SafeAreaView, StyleSheet, Image, TextInput, TouchableHighlight, ScrollView } from "react-native";
-import { Container, Header, Content, Icon, Picker, Form } from "native-base";
+import {
+  View,
+  Text,
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableHighlight,
+  ScrollView,
+  KeyboardAvoidingView
+} from "react-native";
+import { Icon, Picker, Form } from "native-base";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
-import logo from '../../../assets/images/logo.png';
+import logo from "../../../assets/images/logo.png";
 
 export default class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  state = {
+    name: '',
+    email: '',
+    password: '',
+    pass_match: '',
+    role: '',
+    error: false
   }
 
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scroll}>
+        <KeyboardAwareScrollView contentContainerStyle={styles.scroll}>
           <View style={styles.logo}>
             <Image style={styles.logoImg} source={logo} />
           </View>
@@ -25,7 +41,7 @@ export default class Signup extends Component {
               placeholder="Full name"
               keyboardType="default"
               underlineColorAndroid="transparent"
-              // onChangeText={name => this.setState({ name })}
+              onChangeText={name => this.setState({ name })}
             />
           </View>
 
@@ -36,7 +52,7 @@ export default class Signup extends Component {
               keyboardType="email-address"
               autoCapitalize="none"
               underlineColorAndroid="transparent"
-              // onChangeText={email => this.setState({ email })}
+              onChangeText={email => this.setState({ email })}
             />
           </View>
 
@@ -46,7 +62,7 @@ export default class Signup extends Component {
               placeholder="Password"
               secureTextEntry={true}
               underlineColorAndroid="transparent"
-              // onChangeText={password => this.setState({ password })}
+              onChangeText={password => this.setState({ password })}
             />
           </View>
 
@@ -56,7 +72,7 @@ export default class Signup extends Component {
               placeholder="Repeat password"
               secureTextEntry={true}
               underlineColorAndroid="transparent"
-              // onChangeText={pass_match => this.setState({ pass_match })}
+              onChangeText={pass_match => this.setState({ pass_match })}
             />
           </View>
 
@@ -71,9 +87,8 @@ export default class Signup extends Component {
                     style={{ color: "#007aff", fontSize: 25 }}
                   />
                 }
-                style={{ width: undefined }} // ¿?
-                // selectedValue={this.state.selected}
-                // onValueChange={this.onValueChange.bind(this)}
+                selectedValue={this.state.role}
+                onValueChange={role => this.setState({role})}
               >
                 <Picker.Item label="Professional" value="Professional" />
                 <Picker.Item label="Not professional" value="Client" />
@@ -83,11 +98,11 @@ export default class Signup extends Component {
 
           <TouchableHighlight
             style={[styles.buttonContainer, styles.loginButton]}
-            onPress={() => alert('Signup button')}
+            onPress={() => alert("Signup button")}
           >
             <Text style={styles.loginText}>Create account</Text>
           </TouchableHighlight>
-          {true ? (
+          {this.state.error ? (
             <View>
               <Text style={styles.errMsg}>All fields are required</Text>
             </View>
@@ -95,11 +110,11 @@ export default class Signup extends Component {
 
           <TouchableHighlight
             style={styles.buttonContainer}
-            onPress={() => this.props.navigation.navigate('Login')}
+            onPress={() => this.props.navigation.navigate("Login")}
           >
             <Text>Back to login</Text>
           </TouchableHighlight>
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     );
   }
@@ -110,14 +125,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#d0d8e9",
+    backgroundColor: "#d0d8e9"
   },
   scroll: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#d0d8e9",
-    marginBottom: 100,
-    paddingHorizontal: 50,
+    paddingHorizontal: 60
   },
   errMsg: {
     color: "#ff4a57"
