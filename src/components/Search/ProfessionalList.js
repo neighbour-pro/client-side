@@ -5,9 +5,9 @@ import {
   Button,
   StyleSheet,
   Image,
-  ScrollView,
   TouchableHighlight
 } from "react-native";
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import { Searchbar } from 'react-native-paper';
 
 import logo from "../../../assets/images/logo.png";
@@ -21,7 +21,7 @@ export default class ProfessionalList extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.contentList}>
+        <KeyboardAwareScrollView style={styles.contentList}>
         <Searchbar
           style={styles.searchTop}
           placeholder="Search nearby..."
@@ -38,7 +38,7 @@ export default class ProfessionalList extends Component {
           {listMock}
           {listMock}
           {listMock}
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     );
   }
