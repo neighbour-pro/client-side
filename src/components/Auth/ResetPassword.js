@@ -14,10 +14,9 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import logo from "../../../assets/images/logo.png";
 
 
-export default class Login extends Component {
+export default class ResetPassword extends Component {
   state = {
     email: '',
-    password: '',
     error: false
   }
 
@@ -29,7 +28,8 @@ export default class Login extends Component {
           <Image style={styles.logoImg} source={logo} />
         </View>
 
-        <Text style={styles.welcome}>Login to your account</Text>
+        <Text style={styles.welcome}>Recover password</Text>
+        <Text style={styles.description}>Type your email to reset your password</Text>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.inputs}
@@ -41,38 +41,22 @@ export default class Login extends Component {
           />
         </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.inputs}
-            placeholder="Password"
-            secureTextEntry={true}
-            underlineColorAndroid="transparent"
-            onChangeText={password => this.setState({ password })}
-          />
-        </View>
-
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => alert('Try Login')}
+          onPress={() => alert('Send email')}
         >
-          <Text style={styles.loginText}>Login</Text>
+          <Text style={styles.loginText}>Reset Password</Text>
         </TouchableHighlight>
         <View>
           {this.state.error ? (
             <View>
-              <Text style={styles.errMsg}>Email or password are wrong</Text>
+              <Text style={styles.errMsg}>The email is not in the database</Text>
             </View>
           ) : null}
         </View>
 
-        <TouchableHighlight
-          onPress={() => this.props.navigation.navigate('ResetPassword')}
-        >
-          <Text style={styles.bottomText}>Forgot your password?</Text>
-        </TouchableHighlight>
-
         <TouchableHighlight onPress={() => this.props.navigation.navigate('Signup')}>
-          <Text style={styles.bottomText}>Create Account</Text>
+          <Text style={styles.bottomText}>Do not have an account?</Text>
         </TouchableHighlight>
         </KeyboardAwareScrollView>
       </SafeAreaView>
@@ -95,9 +79,13 @@ const styles = StyleSheet.create({
   welcome: {
     fontSize: 20,
     textAlign: "center",
-    margin: 10,
-    marginBottom: 40,
+    // margin: 10,
+    marginTop: 60,
+    marginBottom: 20,
     color: "#333"
+  },
+  description: {
+    marginVertical: 20
   },
   errMsg: {
     color: "#ff4a57"

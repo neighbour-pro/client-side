@@ -11,7 +11,9 @@ import {
   NAV_TAB_INACTIVE_COLOR,
   NAV_TAB_ICON_SIZE,
   DRAWER_DIMENSIONS,
-  DRAWER_OVERLAY_COLOR
+  DRAWER_OVERLAY_COLOR,
+  NAV_TAB_BG_ACTIVE_COLOR,
+  NAV_TAB_BG_INACTIVE_COLOR
 } from "../config/navigation";
 
 const searchIcon = Platform.OS === "ios" ? "ios-search" : "ios-search";
@@ -78,7 +80,9 @@ const Tabs = createBottomTabNavigator(
   {
     tabBarOptions: {
       activeTintColor: NAV_TAB_ACTIVE_COLOR,
-      inactiveTintColor: NAV_TAB_INACTIVE_COLOR
+      inactiveTintColor: NAV_TAB_INACTIVE_COLOR,
+      activeBackgroundColor: NAV_TAB_BG_ACTIVE_COLOR,
+      inactiveBackgroundColor: NAV_TAB_BG_INACTIVE_COLOR,
     }
   }
 );

@@ -1,5 +1,9 @@
-export const NAV_TAB_ACTIVE_COLOR = 'purple';
-export const NAV_TAB_INACTIVE_COLOR = '#333';
+export const NAV_TAB_ACTIVE_COLOR = '#FAFAFA';
+export const NAV_TAB_INACTIVE_COLOR = '#999';
+export const NAV_TAB_BG_INACTIVE_COLOR = '#5432ed';
+export const NAV_TAB_BG_ACTIVE_COLOR = '#5432ed';
 export const NAV_TAB_ICON_SIZE = 24;
+export const NAV_HEADER_COLOR = '#5432ed';
+export const NAV_HEADER_FONT_COLOR = '#FAFAFA';
 export const DRAWER_DIMENSIONS = .8; // % of the window width
 export const DRAWER_OVERLAY_COLOR = '#333';
