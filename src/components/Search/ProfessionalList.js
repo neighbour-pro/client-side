@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#6200ee",
     // borderColor: 'transparent',
-    color: "white"
+    // color: "white"
   },
   subBtnCard: {
     color: "white",
