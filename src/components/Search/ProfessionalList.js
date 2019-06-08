@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
   },
   cardProContent: {
     marginLeft: 20,
-    marginTop: 10
+    marginTop: 10,
+    backgroundColor: 'transparent',
   },
   image: {
     width: 90,
@@ -74,12 +75,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.37,
     shadowRadius: 7.49,
     elevation: 12,
-
     marginLeft: 20,
     marginRight: 20,
     marginTop: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    // backgroundColor: "#fafafaaa",
+    backgroundColor: Platform.OS === 'ios' ? "#fafafacc" : '#efefef',
     padding: 10,
     flexDirection: "row",
     borderRadius: 15,
@@ -128,7 +127,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     borderRadius: 30,
     backgroundColor: Platform.OS === 'ios' ? '#fafafacc' : '#f0f0f0',
-    // backgroundColor: "red",
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10
   }
