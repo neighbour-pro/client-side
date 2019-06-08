@@ -9,9 +9,11 @@ import {
   TextInput,
   TouchableHighlight,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Platform
+  
 } from "react-native";
-import { Icon, Picker, Form } from "native-base";
+import { Icon, Form, Picker } from "native-base";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 import logo from "../../../assets/images/logo.png";
@@ -76,11 +78,17 @@ export default class Signup extends Component {
             />
           </View>
 
-          <View style={styles.dropdownContainer}>
-            <Form>
+          <View style={Platform.OS === 'ios' ? styles.iosPicker : null}>
+            <Form style={Platform.OS === 'android' ? styles.androidRoleContainer : styles.iosRoleContainer}>
+              {
+                Platform.OS === 'android' ?
+                <Text>Select your role: </Text> :
+                null
+              }
               <Picker
                 mode="dropdown"
                 placeholder="I am..."
+                placeholderStyle={{color: '#333', width: 100}}
                 iosIcon={
                   <Icon
                     name="arrow-dropdown-circle"
@@ -181,14 +189,27 @@ const styles = StyleSheet.create({
   loginText: {
     color: "white"
   },
-  dropdownContainer: {
+  iosPicker: {
     borderBottomColor: "#F5FCFF",
     borderRadius: 30,
     borderBottomWidth: 1,
-    width: 250,
     height: 45,
     marginBottom: 20,
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+  androidRoleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    height: 45,
+    width: 250,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  iosRoleContainer: {
+    width: 250
   },
   logo: {
     width: 130,
