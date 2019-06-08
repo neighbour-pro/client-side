@@ -51,8 +51,10 @@ export default class ProfessionalMap extends Component {
           }
         );
       },
-      error => this.setState({ error: error.message }),
-      {
+      error => {
+        alert('An error happened: '+error.message);
+        this.setState({ error: error.message })
+      }, {
         enableHighAccuracy: false,
         timeout: 20000,
         maximumAge: 1000

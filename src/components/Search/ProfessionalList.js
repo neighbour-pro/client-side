@@ -5,7 +5,8 @@ import {
   Button,
   StyleSheet,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  Platform
 } from "react-native";
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import { Searchbar } from 'react-native-paper';
@@ -77,8 +78,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginTop: 20,
-    // backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    backgroundColor: "#fafafaaa",
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    // backgroundColor: "#fafafaaa",
     padding: 10,
     flexDirection: "row",
     borderRadius: 15,
@@ -96,7 +97,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     alignSelf: "flex-start",
-    // color: "hsl(30, 50%, 50%)"
     color: "#333a"
   },
   btnCard: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#6200ee",
     // borderColor: 'transparent',
-    // color: "white"
+    color: "white"
   },
   subBtnCard: {
     color: "white",
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 21,
     marginTop: 15,
     borderRadius: 30,
-    backgroundColor: "#fafafacc",
+    backgroundColor: Platform.OS === 'ios' ? '#fafafacc' : '#f0f0f0',
+    // backgroundColor: "red",
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10
   }
