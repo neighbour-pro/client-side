@@ -78,6 +78,7 @@ const Tabs = createBottomTabNavigator(
     }
   },
   {
+    initialRouteName: 'MessageTab',
     tabBarOptions: {
       activeTintColor: NAV_TAB_ACTIVE_COLOR,
       inactiveTintColor: NAV_TAB_INACTIVE_COLOR,
