@@ -140,10 +140,10 @@ const styles = StyleSheet.create({
   balloon: {
     maxWidth: 250,
     padding: 15,
-    borderRadius: 20
   },
   itemIn: {
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    backgroundColor: 'hsl(90, 20%, 80%)',
   },
   itemOut: {
     alignSelf: "flex-end"
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     backgroundColor: "#eeeeee",
-    borderRadius: 300,
+    borderRadius: 25,
     padding: 5
   }
 });

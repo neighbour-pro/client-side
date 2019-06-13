@@ -133,9 +133,7 @@ export default class ProfessionalMap extends Component {
                 }}
                 title={pro.title}
                 description={pro.subtitle}
-                onCalloutPress={() => {
-                  alert('Go to professional detail')
-                }}
+                onCalloutPress={() => this.props.navigation.navigate("ProfessionalDetail")}
               />
             );
           })}
