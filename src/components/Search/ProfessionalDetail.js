@@ -10,7 +10,6 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scrollview";
 
 import logo from "../../../assets/images/logo.png";
-import { NavigationActions } from "react-navigation";
 
 export default class ProfessionalDetail extends Component {
   state = {
