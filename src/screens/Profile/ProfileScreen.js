@@ -6,11 +6,15 @@ import {
   NAV_HEADER_COLOR,
   NAV_HEADER_FONT_COLOR
 } from "../../config/navigation";
+import UserProfileEdit from "../../components/Profile/UserProfileEdit";
 
 export default createStackNavigator(
   {
     UserProfile: {
       screen: UserProfile
+    },
+    UserProfileEdit: {
+      screen: UserProfileEdit
     }
   },
   {

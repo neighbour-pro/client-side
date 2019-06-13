@@ -39,7 +39,7 @@ export default class ChatDetail extends Component {
 
   renderDate = date => (
     <Text style={styles.time}>
-      {`${new Date().getHours() < 10 ? '0'+new Date().getHours() : new Date().getHours()}:${new Date().getMinutes() < 10 ? '0'+new Date().getMinutes() : new Date().getMinutes()}`}
+      {`${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}`}
     </Text>
   );
 
