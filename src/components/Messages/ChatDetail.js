@@ -6,10 +6,12 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  StyleSheet
+  StyleSheet,
+  Platform
 } from "react-native";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import sendIcon from "../../../assets/images/filled-sent.png";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 let fakeId = 0;
 
@@ -21,7 +23,12 @@ export default class ChatDetail extends Component {
       navigation.state.params.title.length <= maxNameLength
         ? navigation.state.params.title
         : navigation.state.params.title.slice(0, maxNameLength - 3) + "..."
-    }`
+    }`,
+    headerRight: (
+      <TouchableOpacity style={styles.makeOffer} onPress={()=>navigation.navigate('MakeOffer')}>
+        <Ionicons size={36} color='#FAFAFA' name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}/>
+      </TouchableOpacity>
+    )
   });
 
   state = {
@@ -161,5 +168,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#eeeeee",
     borderRadius: 25,
     padding: 5
+  },
+  makeOffer: {
+    paddingHorizontal: 15
   }
 });

@@ -4,7 +4,7 @@ import { createStackNavigator, withNavigation } from "react-navigation";
 import ProfessionalList from "../../components/Search/ProfessionalList";
 import ProfessionalMap from "../../components/Search/ProfessionalMap";
 import ProfessionalDetail from "../../components/Search/ProfessionalDetail";
-import ProfessionalReviewList from "../../components/Search/ProfessionalReviewList";
+import ReviewList from "../../components/Review/ReviewList";
 import {
   NAV_HEADER_COLOR,
   NAV_HEADER_FONT_COLOR
@@ -58,7 +58,7 @@ export default createStackNavigator(
       screen: ProfessionalDetail
     },
     ProfessionalReviewList: {
-      screen: ProfessionalReviewList
+      screen: ReviewList
     }
   },
   {
