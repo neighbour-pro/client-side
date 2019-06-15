@@ -61,24 +61,44 @@ const menuConfig = {
   iconColor: "#FAFAFA",
   options: [
     {
-      name: 'professionalList',
+      name: 'professionalMap',
       descriptionIcon: true,
-      descriptionIconIos: "ios-search",
-      descriptionIconAndroid: "md-search",
-      label: "Look for professionals",
+      descriptionIconIos: "ios-map",
+      descriptionIconAndroid: "md-map",
+      label: "Professionals on the map",
       nextIcon: true,
       textStyle: {},
-      goTo: "ProfessionalList"
+      goTo: "ProfessionalMap"
     },
     {
       name: 'editProfile',
       descriptionIcon: true,
-      descriptionIconIos: "ios-settings",
-      descriptionIconAndroid: "md-settings",
+      descriptionIconIos: "ios-build",
+      descriptionIconAndroid: "md-build",
       label: "Edit profile",
       nextIcon: true,
       textStyle: {},
       goTo: "UserProfileEdit"
+    },
+    {
+      name: 'offerList',
+      descriptionIcon: true,
+      descriptionIconIos: "ios-paper",
+      descriptionIconAndroid: "md-paper",
+      label: "Offer List",
+      nextIcon: true,
+      textStyle: {},
+      goTo: "OfferList"
+    },
+    {
+      name: 'pendingReviews',
+      descriptionIcon: true,
+      descriptionIconIos: "ios-star",
+      descriptionIconAndroid: "md-star",
+      label: "Pending Reviews",
+      nextIcon: true,
+      textStyle: {},
+      goTo: "PendingReviews"
     },
     {
       name: 'logout',
