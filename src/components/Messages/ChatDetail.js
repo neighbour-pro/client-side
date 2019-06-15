@@ -49,7 +49,8 @@ export default class ChatDetail extends Component {
           text: "Lorem ipsum ".repeat(Math.floor(Math.random() * (50 - 3) + 3)),
           type: Math.random() > .5 ? 'offer' : "message",
           title: 'The service',
-          price: '45.56€'
+          price: '45.56€',
+          status: ['pending', 'accepted', 'rejected'][Math.floor(Math.random()*3)]
         }))
     }
   };
@@ -60,6 +61,38 @@ export default class ChatDetail extends Component {
         date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
       }`}
     </Text>
+  );
+
+  renderPendingOffer = (item) => (
+    <TouchableOpacity onPress={()=>this.props.navigation.navigate('OfferDetail')} style={styles.offer}>
+      <Text style={styles.offerHelp}>Click for more details:</Text>
+      <View style={styles.offerContent}>
+        <Text style={styles.offerTitle}>{item.title}</Text>
+        <Text style={styles.offerPrice}>{item.price}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  renderAcceptedOffer = (item) => (
+    <TouchableOpacity onPress={()=>this.props.navigation.navigate('OfferDetail')} style={[styles.offer, styles.acceptedOffer]}>
+      <Text style={[styles.offerHelp, styles.offerHelpAccepted]}>Click for more details:</Text>
+      <View style={styles.offerContent}>
+        <Ionicons size={32} color='#FAFAFA' name={Platform.OS === 'ios' ? 'ios-checkmark-circle' : 'md-checkmark-circle'}/>
+        <Text style={[styles.offerTitle, styles.offerTitleAccepted]}>{item.title}</Text>
+        <Text style={[styles.offerPrice, styles.offerPriceAccepted]}>{item.price}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
+  renderRejectedOffer = (item) => (
+    <TouchableOpacity onPress={()=>this.props.navigation.navigate('OfferDetail')} style={[styles.offer, styles.rejectedOffer]}>
+      <Text style={[styles.offerHelp, styles.offerHelpRejected]}>Click for more details:</Text>
+      <View style={styles.offerContent}>
+        <Ionicons size={32} color='#FAFAFA' name={Platform.OS === 'ios' ? 'ios-close-circle' : 'md-close-circle'}/>
+        <Text style={[styles.offerTitle, styles.offerTitleRejected]}>{item.title}</Text>
+        <Text style={[styles.offerPrice, styles.offerPriceRejected]}>{item.price}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   render() {
@@ -90,13 +123,13 @@ export default class ChatDetail extends Component {
                     {inMessage && this.renderDate(item.date)}
                   </View>
                 ) : (
-                  <TouchableOpacity onPress={()=>this.props.navigation.navigate('OfferDetail')} style={styles.offer}>
-                    <Text style={styles.offerHelp}>Click for more details:</Text>
-                    <View style={styles.offerContent}>
-                      <Text style={styles.offerTitle}>{item.title}</Text>
-                      <Text style={styles.offerPrice}>{item.price}</Text>
-                    </View>
-                  </TouchableOpacity>
+                  item.status === 'pending' ? (
+                    this.renderPendingOffer(item)
+                  ) :
+                  item.status === 'accepted' ? (
+                    this.renderAcceptedOffer(item)
+                  ) :
+                    this.renderRejectedOffer(item)
                 )}
               </React.Fragment>
             );
@@ -205,9 +238,21 @@ const styles = StyleSheet.create({
     borderColor: '#333',
     padding: 15,
   },
+  acceptedOffer: {
+    backgroundColor: 'hsl(90, 50%, 30%)',
+  },
+  rejectedOffer: {
+    backgroundColor: 'hsl(0, 50%, 50%)',
+  },
   offerHelp: {
     alignSelf: 'center',
     marginBottom: 5,
+  },
+  offerHelpAccepted: {
+    color: '#FAFAFA'
+  },
+  offerHelpRejected: {
+    color: '#FAFAFA'
   },
   offerContent: {
     flexDirection: 'row',
@@ -220,9 +265,21 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     maxWidth: '75%'
   },
+  offerTitleAccepted: {
+    color: '#FAFAFA'
+  },
+  offerTitleRejected: {
+    color: '#FAFAFA'
+  },
   offerPrice: {
     fontSize: 16,
     color: 'hsl(90, 50%, 30%)',
     paddingHorizontal: 5
+  },
+  offerPriceAccepted: {
+    color: '#FAFAFA',
+  },
+  offerPriceRejected: {
+    color: '#FAFAFA',
   }
 });
