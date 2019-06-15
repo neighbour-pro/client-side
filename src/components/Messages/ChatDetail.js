@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { KeyboardAwareFlatList } from "react-native-keyboard-aware-scroll-view";
 import sendIcon from "../../../assets/images/filled-sent.png";
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 let fakeId = 0;
 
@@ -25,8 +25,15 @@ export default class ChatDetail extends Component {
         : navigation.state.params.title.slice(0, maxNameLength - 3) + "..."
     }`,
     headerRight: (
-      <TouchableOpacity style={styles.makeOffer} onPress={()=>navigation.navigate('MakeOffer')}>
-        <Ionicons size={36} color='#FAFAFA' name={Platform.OS === 'ios' ? 'ios-add' : 'md-add'}/>
+      <TouchableOpacity
+        style={styles.makeOffer}
+        onPress={() => navigation.navigate("MakeOffer")}
+      >
+        <Ionicons
+          size={36}
+          color="#FAFAFA"
+          name={Platform.OS === "ios" ? "ios-add" : "md-add"}
+        />
       </TouchableOpacity>
     )
   });
@@ -35,18 +42,23 @@ export default class ChatDetail extends Component {
     textMessage: "",
     conversation: {
       messages: new Array(Math.floor(Math.random() * (15 - 4) + 4))
-      .fill({})
-      .map(() => ({
-        _id: (++fakeId).toString(),
-        date: new Date(),
-        text: "Lorem ipsum ".repeat(Math.floor(Math.random() * (50 - 3) + 3))
-      }))
+        .fill({})
+        .map(() => ({
+          _id: (++fakeId).toString(),
+          date: new Date(),
+          text: "Lorem ipsum ".repeat(Math.floor(Math.random() * (50 - 3) + 3)),
+          type: Math.random() > .5 ? 'offer' : "message",
+          title: 'The service',
+          price: '45.56€'
+        }))
     }
   };
 
   renderDate = date => (
     <Text style={styles.time}>
-      {`${date.getHours() < 10 ? '0'+date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()}`}
+      {`${date.getHours() < 10 ? "0" + date.getHours() : date.getHours()}:${
+        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()
+      }`}
     </Text>
   );
 
@@ -68,13 +80,25 @@ export default class ChatDetail extends Component {
             let inMessage = Math.random() < 0.5;
             let itemStyle = inMessage ? styles.itemIn : styles.itemOut;
             return (
-              <View style={[styles.item, itemStyle]}>
-                {!inMessage && this.renderDate(item.date)}
-                <View style={[styles.balloon]}>
-                  <Text>{item.text}</Text>
-                </View>
-                {inMessage && this.renderDate(item.date)}
-              </View>
+              <React.Fragment>
+                {item.type === "message" ? (
+                  <View style={[styles.item, itemStyle]}>
+                    {!inMessage && this.renderDate(item.date)}
+                    <View style={[styles.balloon]}>
+                      <Text>{item.text}</Text>
+                    </View>
+                    {inMessage && this.renderDate(item.date)}
+                  </View>
+                ) : (
+                  <TouchableOpacity onPress={()=>this.props.navigation.navigate('OfferDetail')} style={styles.offer}>
+                    <Text style={styles.offerHelp}>Click for more details:</Text>
+                    <View style={styles.offerContent}>
+                      <Text style={styles.offerTitle}>{item.title}</Text>
+                      <Text style={styles.offerPrice}>{item.price}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+              </React.Fragment>
             );
           }}
         />
@@ -105,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   contentList: {
-    flex: 1,
+    flex: 1
   },
   footer: {
     flexDirection: "row",
@@ -146,11 +170,11 @@ const styles = StyleSheet.create({
   },
   balloon: {
     maxWidth: 250,
-    padding: 15,
+    padding: 15
   },
   itemIn: {
     alignSelf: "flex-start",
-    backgroundColor: 'hsl(90, 20%, 80%)',
+    backgroundColor: "hsl(90, 20%, 80%)"
   },
   itemOut: {
     alignSelf: "flex-end"
@@ -171,5 +195,34 @@ const styles = StyleSheet.create({
   },
   makeOffer: {
     paddingHorizontal: 15
+  },
+  offer: {
+    marginHorizontal: 15,
+    marginVertical: 10,
+    backgroundColor: '#FAFAFA',
+    borderWidth: 1,
+    borderRadius: 15,
+    borderColor: '#333',
+    padding: 15,
+  },
+  offerHelp: {
+    alignSelf: 'center',
+    marginBottom: 5,
+  },
+  offerContent: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  offerTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    maxWidth: '75%'
+  },
+  offerPrice: {
+    fontSize: 16,
+    color: 'hsl(90, 50%, 30%)',
+    paddingHorizontal: 5
   }
 });
