@@ -7,15 +7,15 @@ export default class OfferDetail extends Component {
     title: 'The offer title',
     description: 'Lorem ipsum dolor sit amet'.repeat(30),
     price: '45.56€',
-    status: ['pending', 'accepted', 'rejected'][Math.floor(Math.random()*3)]
+    status: ['pending', 'accepted', 'rejected'][0]
   }
 
   renderPendingActions = () => (
     <View style={styles.actions}>
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatDetail')} style={[styles.btn, styles.reject]}>
+      <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.btn, styles.reject]}>
         <Text style={styles.btnText}>Reject</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('ChatDetail')} style={[styles.btn, styles.accept]}>
+      <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={[styles.btn, styles.accept]}>
         <Text style={styles.btnText}>Accept</Text>
       </TouchableOpacity>
     </View>

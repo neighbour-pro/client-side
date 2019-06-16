@@ -34,10 +34,10 @@ export default class OfferList extends Component {
         </View>
       </View>
       <TouchableOpacity
-        style={styles.btn}
-        onPress={() => this.props.navigation.navigate("OfferDetail")}
+        style={[styles.btn, styles.btnPay]}
+        onPress={() => this.props.navigation.navigate("Payment")}
       >
-        <Text style={styles.btnText}>Go to offer</Text>
+        <Text style={styles.btnText}>Pay</Text>
       </TouchableOpacity>
     </View>
   );
@@ -147,5 +147,8 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#FAFAFA"
+  },
+  btnPay: {
+    backgroundColor: 'hsl(90, 50%, 30%)',
   }
 });
